@@ -2,3 +2,5 @@ pymongo>=4.10.0
 python-dotenv>=1.0.0
 Faker>=20.0.0
 dnspython>=2.6.0
+pandas>=2.2.0
+pyarrow>=15.0.0
