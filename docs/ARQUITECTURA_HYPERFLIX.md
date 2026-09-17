@@ -401,8 +401,9 @@ El repositorio cuenta con la implementación ejecutable completa que valida esta
 | **Inicializador de Esquemas** | `scripts/crear_estructura.py` | Crea colecciones OLTP, índices de unicidad/búsqueda, datos semilla y colección OLAP. |
 | **Generador Masivo** | `scripts/generar_datos_masivos.py` | Simula 1.500+ usuarios, 60+ películas, canales IPTV y más de 20.000 eventos de telemetría de streaming. |
 | **Pipeline ETL / ELT** | `scripts/transformar_oltp_a_olap.py` | Pipeline de agregación que construye el Modelo en Estrella (`reproducciones_analiticas`). |
-| **Benchmarking Analítico** | `scripts/benchmarking_consultas.py` | Aplica índices compuestos y mide latencias en 6 consultas analíticas críticas. |
-| **Simulador de Data Lake** | `scripts/simular_data_lake.py` | Genera y particiona las 4 zonas del Data Lake: `raw`, `bronze`, `silver`, `gold`. |
+| **Data Lake Parquet (Fase 2)** | `data_lake.py` | Pipeline oficial de Data Lake (Atlas ➔ Pandas ➔ Parquet Snappy en zonas `raw`, `processed`, `curated`). |
+| **Consumidor CDC (Spark Streaming)** | `scripts/consumidor_streaming_cdc.py` | Consumidor reactivo con Change Streams que procesa, enriquece y detecta anomalías QoS en tiempo real. |
+| **Productor Streaming (Kafka)** | `scripts/productor_streaming.py` | Emisor continuo de telemetría de streaming y eventos de usuario hacia MongoDB Atlas. |
 | **Plataforma Web & IPTV** | `web/index.html` + `web/app.js` | Landing page, catálogo interactivo, reproductor IPTV en vivo vía HLS y monitor de telemetría. |
 
 ---
@@ -433,11 +434,20 @@ El repositorio cuenta con la implementación ejecutable completa que valida esta
    ```bash
    python scripts/benchmarking_consultas.py
    ```
-7. **Simular Zonas del Data Lake:**
+7. **Ejecutar Pipeline del Data Lake (Parquet Snappy):**
    ```bash
-   python scripts/simular_data_lake.py
+   python data_lake.py
    ```
-8. **Lanzar la Plataforma Web & Visor IPTV:**
+8. **Demostración de Event Streaming y CDC en Tiempo Real (2 Terminales):**
+   - **Terminal 1 (Consumidor Spark Streaming / Change Streams):**
+     ```bash
+     python scripts/consumidor_streaming_cdc.py
+     ```
+   - **Terminal 2 (Productor de Telemetría / Apache Kafka):**
+     ```bash
+     python scripts/productor_streaming.py
+     ```
+9. **Lanzar la Plataforma Web & Visor IPTV:**
    Abrir el archivo `web/index.html` directamente en el navegador o iniciar un servidor local:
    ```bash
    python -m http.server 8000 --directory web

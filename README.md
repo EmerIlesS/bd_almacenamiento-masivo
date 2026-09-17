@@ -2,7 +2,7 @@
 
 > **Proyecto de Bases de Datos y Almacenamiento Masivo (Octavo Semestre)**  
 > **Fase 1 y Fase 2: Análisis de Requisitos, Persistencia Políglota y Data Lake Parquet**  
-> **Programa:** Ingeniería de Sistemas — ITP (2026-1)
+> **Programa:** Ingeniería de Sistemas — uniputumayo (2026-1)
 
 ---
 
@@ -35,20 +35,25 @@ bd_almacenamiento-masivo/
 ├── .gitignore                        # Protección de credenciales .env y entornos .venv
 ├── conexion.py                       # Módulo de conexión central a MongoDB Atlas con soporte UTF-8
 ├── data_lake.py                      # Pipeline oficial del Data Lake (Atlas ➔ Pandas ➔ Parquet Snappy)
-├── requirements.txt                  # Dependencias de Python (pymongo, pandas, pyarrow, faker, dotenv)
+├── spark_processor.py                # Entrada directa al Motor Big Data de Fase 2 (Apache Spark Job)
+├── requirements.txt                  # Dependencias de Python (pymongo, pandas, pyarrow, faker, dotenv, pyspark)
 ├── README.md                         # Guía general de uso y presentación del proyecto
 ├── docs/
 │   ├── INFORME_PARCIAL_HYPERFLIX.md  # Informe técnico oficial del Parcial Primer Corte (Adaptado a HyperFlix)
 │   └── ARQUITECTURA_HYPERFLIX.md     # Documento maestro con especificación formal y diagramas Mermaid
 ├── scripts/
+│   ├── spark_job.py                  # Motor Apache Spark Job (explode, withColumn, groupBy+agg, Data Warehouse)
 │   ├── crear_estructura.py           # Inicializa colecciones OLTP, índices únicos y datos semilla
 │   ├── generar_datos_masivos.py      # Generador de 20.000+ eventos de streaming, 1.500+ usuarios y catálogo
 │   ├── transformar_oltp_a_olap.py    # Pipeline ETL de agregación para construir el Modelo en Estrella
-│   └── benchmarking_consultas.py     # Benchmarking analítico con medición de latencias (ms) e índices compuestos
+│   ├── benchmarking_consultas.py     # Benchmarking analítico con medición de latencias (ms) e índices compuestos
+│   ├── consultar_parquet.py          # Lector analítico columnar de los archivos Parquet en el Data Lake
+│   ├── productor_streaming.py        # Emisor de eventos de telemetría en tiempo real (simulación Kafka)
+│   └── consumidor_streaming_cdc.py   # Consumidor Change Streams (simulación Spark Streaming CDC)
 ├── data_lake/                        # Data Lake estructurado en 3 zonas (Formato Parquet Snappy)
 │   ├── raw/                          # usuarios.parquet, peliculas.parquet, canales_tv.parquet, eventos_reproduccion.parquet
 │   ├── processed/                    # reproducciones_procesadas.parquet (Datos limpios y enriquecidos con fechas)
-│   └── curated/                      # reproducciones_curadas.parquet (Modelo Estrella listo para BI)
+│   └── curated/                      # reproducciones_curadas.parquet y kpis_spark_*.parquet (Listo para DW / BI)
 └── web/                              # Aplicación Web y Landing Page
     ├── index.html                    # Landing page + Reproductor IPTV HLS + Monitor de Telemetría
     └── app.js                        # Lógica de reproducción, canales libres y telemetría en vivo
@@ -109,7 +114,40 @@ Ejecuta el pipeline oficial que extrae de Atlas, transforma con Pandas y genera 
 python data_lake.py
 ```
 
-### 9. Lanzar la Plataforma Web & Reproductor IPTV en Vivo
+### 9. Demostración de Event Streaming & CDC en Tiempo Real (Simulación Kafka + Spark Streaming) ⚡
+Abre **dos terminales de PowerShell en paralelo** para demostrar el flujo en vivo:
+- **Terminal 1 (Consumidor Spark Streaming / Change Streams):**
+  ```powershell
+  python scripts/consumidor_streaming_cdc.py
+  ```
+- **Terminal 2 (Productor de Telemetría / Emisor Kafka):**
+  ```powershell
+  python scripts/productor_streaming.py
+  ```
+*(Observarás cómo cada evento emitido en la Terminal 2 es capturado instantáneamente por el Change Stream en la Terminal 1 sin bloqueos ni polling).*
+
+### 10. Motor de Procesamiento Big Data con Apache Spark (Fase 2) ⚡
+Procesa los datos masivos almacenados en el Data Lake implementando la arquitectura:
+$$\text{MongoDB Atlas} \longrightarrow \text{Data Lake (Raw)} \longrightarrow \mathbf{\text{Apache Spark Job}} \longrightarrow \text{Curated / Data Warehouse} \longrightarrow \text{BI}$$
+
+Cumple con todos los requisitos de la **Fase 2**:
+1. **Configuración de Apache Spark (PySpark):** Sesión distribuida con `SparkSession`.
+2. **Detección Dinámica del Último Archivo:** Selecciona automáticamente el lote más reciente generado en el Data Lake (*"En una empresa, cada día se genera un nuevo archivo. El programa siempre trabajará con el último"*).
+3. **Transformación 1 (`explode`):** Desanida listas y arrays en múltiples filas individuales (*"Spark convierte una lista en varias filas"*).
+4. **Transformación 2 (`withColumn`):** Limpieza, filtros, estandarización y categorizaciones de negocio (duración, satisfacción, marcas de auditoría).
+5. **Transformación 3 (`groupBy` + `agg`):** Agregaciones Big Data para generar la tabla de hechos con KPIs analíticos.
+6. **Destino Data Warehouse:** Guarda los resultados en `data_lake/curated/` en formato Apache Parquet.
+
+**Comando de ejecución directa:**
+```powershell
+python spark_processor.py
+```
+*O procesando un archivo específico:*
+```powershell
+python spark_processor.py data_lake/raw/peliculas.parquet
+```
+
+### 11. Lanzar la Plataforma Web & Reproductor IPTV en Vivo
 Abre directamente `web/index.html` en tu navegador, o inicia un servidor local:
 ```powershell
 python -m http.server 8000 --directory web
