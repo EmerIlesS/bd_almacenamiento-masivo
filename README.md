@@ -36,16 +36,19 @@ bd_almacenamiento-masivo/
 ├── conexion.py                       # Módulo de conexión central a MongoDB Atlas con soporte UTF-8
 ├── data_lake.py                      # Pipeline oficial del Data Lake (Atlas ➔ Pandas ➔ Parquet Snappy)
 ├── spark_processor.py                # Entrada directa al Motor Big Data de Fase 2 (Apache Spark Job)
+├── data_warehouse.py                 # Entrada directa al Data Warehouse / Modelo en Estrella (Fase 3)
 ├── requirements.txt                  # Dependencias de Python (pymongo, pandas, pyarrow, faker, dotenv, pyspark)
 ├── README.md                         # Guía general de uso y presentación del proyecto
 ├── docs/
 │   ├── INFORME_PARCIAL_HYPERFLIX.md  # Informe técnico oficial del Parcial Primer Corte (Adaptado a HyperFlix)
 │   └── ARQUITECTURA_HYPERFLIX.md     # Documento maestro con especificación formal y diagramas Mermaid
 ├── scripts/
+│   ├── construir_data_warehouse_hyperflix.py  # Construcción del Modelo en Estrella en Atlas (Fase 3 - HyperFlix)
+│   ├── construir_data_warehouse_estrella.py   # Construcción del Modelo en Estrella en Atlas (Fase 3 - Guía Docente)
 │   ├── spark_job.py                  # Motor Apache Spark Job (explode, withColumn, groupBy+agg, Data Warehouse)
 │   ├── crear_estructura.py           # Inicializa colecciones OLTP, índices únicos y datos semilla
 │   ├── generar_datos_masivos.py      # Generador de 20.000+ eventos de streaming, 1.500+ usuarios y catálogo
-│   ├── transformar_oltp_a_olap.py    # Pipeline ETL de agregación para construir el Modelo en Estrella
+│   ├── transformar_oltp_a_olap.py    # Pipeline ETL de agregación para construir la colección analítica fuente
 │   ├── benchmarking_consultas.py     # Benchmarking analítico con medición de latencias (ms) e índices compuestos
 │   ├── consultar_parquet.py          # Lector analítico columnar de los archivos Parquet en el Data Lake
 │   ├── productor_streaming.py        # Emisor de eventos de telemetría en tiempo real (simulación Kafka)
@@ -147,7 +150,24 @@ python spark_processor.py
 python spark_processor.py data_lake/raw/peliculas.parquet
 ```
 
-### 11. Lanzar la Plataforma Web & Reproductor IPTV en Vivo
+### 11. Data Warehouse con Modelo en Estrella en MongoDB Atlas (Fase 3) ⭐
+Transforma los datos analíticos de streaming en un **Modelo en Estrella (Star Schema)** físico en MongoDB Atlas, aplicando los conceptos de modelado dimensional que se usan en BigQuery, Snowflake y Redshift:
+
+* **`dim_tiempo`:** Fecha, año, mes, día, hora pico y **trimestre calculado con `$ceil` y `$divide`**, más fin de semana con **`$cond`**.
+* **`dim_usuario`:** Identificador único, país, ciudad, plan, horas vistas y promedio por sesión con **`$first`**, **`$sum`** y **`$avg`**.
+* **`dim_contenido`:** Títulos VOD / canales IPTV, género/categoría, minutos reproducidos y completitud media con **`$first`** y **`$round`**.
+* **`dim_dispositivo`:** Smart TVs, móviles, PCs y métricas de Calidad de Servicio (QoS).
+* **`fact_reproducciones`:** **Tabla de hechos central**, almacena únicamente las claves foráneas a las dimensiones (`fecha_id`, `usuario_id`, `contenido_id`, `dispositivo_tipo`) junto a las métricas cuantitativas, eliminando la duplicación de datos.
+* **Optimización Big Data:** Ejecutado con **`allowDiskUse=True`** y persistencia directa mediante **`$merge`**.
+
+**Comando de ejecución (HyperFlix Streaming):**
+```powershell
+python data_warehouse.py
+```
+
+*(Opcional: Si deseas ejecutar el caso de estudio de clase sobre e-commerce/ventas: `python data_warehouse.py ventas`).*
+
+### 12. Lanzar la Plataforma Web & Reproductor IPTV en Vivo
 Abre directamente `web/index.html` en tu navegador, o inicia un servidor local:
 ```powershell
 python -m http.server 8000 --directory web
