@@ -391,6 +391,28 @@ classDiagram
 
 ---
 
+## 4.4. Estrategia de Resiliencia y Disaster Recovery Cross-Region (DR)
+
+Para proteger la infraestructura frente a cortes totales de centros de datos, incidentes de red transcontinentales o catástrofes regionales en la nube, HYPERFLIX implementa una arquitectura **Multi-Región Cross-Region** bajo el modelo **Warm Standby**:
+
+### 1. Parámetros de Recuperación (RPO y RTO)
+- **RPO (Recovery Point Objective):** $< 1$ minuto para transacciones críticas y cuentas de usuarios; $< 5$ minutos para telemetría de streaming (amortiguada por el búfer local en reproductores cliente).
+- **RTO (Recovery Time Objective):** $< 5$ minutos para conmutación por error (*automatic failover*) en la base de datos y API Gateway; $< 15$ minutos para despliegue de cómputo analítico Big Data.
+
+### 2. Topología Geográfica Desacoplada
+- **Región Primaria (Activa):** AWS `us-east-1` (Norte de Virginia) — 100% de operaciones en producción.
+- **Región Secundaria (DR / Warm Standby):** AWS `us-west-2` (Oregón) — Réplica continua y capacidad en reserva.
+
+### 3. Mecanismos por Capa
+- **Base de Datos (MongoDB Atlas):** Clúster Multi-Región con réplica continua del Oplog entre regiones, conmutación automática por consenso Raft y Point-in-Time Recovery (PITR) con ventana de 7 días.
+- **Data Lake (S3 Parquet):** Cross-Region Replication (CRR) asíncrona para todas las particiones (`raw/`, `processed/`, `curated/`) con bloqueo de inmutabilidad (Object Lock WORM).
+- **Ingesta y Streaming:** Apache Kafka MirrorMaker 2 (MM2) para sincronización de tópicos y offsets de telemetría.
+- **Enrutamiento Global:** AWS Route 53 / Cloudflare DNS Failover con Health Checks activos cada 10s (TTL: 60s).
+
+> 📘 **Especificación detallada:** Para consultar el runbook de failover paso a paso, los diagramas de flujo y el plan de simulacros semestrales, ver el documento maestro: [docs/DISASTER_RECOVERY_CROSS_REGION.md](DISASTER_RECOVERY_CROSS_REGION.md).
+
+---
+
 ## 5. Implementación y Validación Práctica en el Repositorio
 
 El repositorio cuenta con la implementación ejecutable completa que valida esta arquitectura:

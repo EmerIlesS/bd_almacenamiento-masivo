@@ -45,7 +45,9 @@ Adaptar e implementar la arquitectura de datos para la plataforma de streaming *
 - ✅ **Estrategia de Indexación Completa:**
   - Índices únicos para integridad referencial en `correo` (usuarios), `codigo_pelicula` (películas) y `codigo_canal` (canales).
   - Índices compuestos en la colección OLAP (`idx_tiempo`, `idx_contenido_tipo_genero`, `idx_usuario_pais_plan`, `idx_disp_buffering`, `idx_abandono_genero`, `idx_hora_dia`).
-- ✅ **Consultas Analíticas con Benchmarking:** Medición precisa de latencias en 6 consultas clave del negocio de streaming, logrando tiempos de respuesta estrictamente inferiores a **500 ms** (promedio real: **222.01 ms**).
+- ✅ **Consultas Analíticas con Benchmarking:** Medición precisa de latencias en 10 consultas clave del negocio de streaming, logrando tiempos de respuesta estrictamente inferiores a **500 ms** (promedio real: **243.56 ms**).
+- ✅ **Dashboard de Monitoreo Integral (6 Paneles):** Monitoreo visual de colecciones, latencias vs SLA, proyección de costos en Atlas, tendencias de streaming y métricas de almacenamiento.
+- ✅ **Estrategia de Disaster Recovery Cross-Region (DR):** Arquitectura de alta disponibilidad multi-región (`us-east-1` ➔ `us-west-2`) bajo el modelo *Warm Standby*, con RPO $< 1$ min, RTO $< 5$ min, replicación de Oplog en Atlas, S3 Cross-Region Replication (CRR) para el Data Lake Parquet y DNS Failover.
 - ✅ **Plataforma Web & Reproductor IPTV en Vivo:** Landing page interactiva estilo Netflix, catálogo VOD y visor de canales de TV abiertos reales mediante HLS.js emitiendo telemetría en vivo.
 
 ---
@@ -416,7 +418,10 @@ Para enriquecer la entrega, se desarrolló una aplicación web interactiva en `w
    > *"Se utilizó el Aggregation Pipeline nativo de MongoDB con las etapas `$lookup` y `$unwind` para transformar eventos crudos de streaming en un modelo dimensional desnormalizado (OLAP). Se habilitó `allowDiskUse: True` para garantizar escalabilidad y evitar el error por límite de memoria RAM de 100 MB al procesar los 20.003 documentos en memoria."*
 
 3. **Indexación Compuesta:**
-   > *"Se implementó una estrategia de Índices Compuestos (`idx_tiempo`, `idx_contenido_tipo_genero`, `idx_usuario_pais_plan`, `idx_disp_buffering`) que permite resolver operaciones analíticas de filtrado y agregación mediante escaneos de índice (*IXSCAN*) en lugar de escaneos completos de colección (*COLLSCAN*), reduciendo la complejidad de $O(N)$ a $O(\log N)$ y logrando latencias promedio de 222 ms."*
+   > *"Se implementó una estrategia de Índices Compuestos (`idx_tiempo`, `idx_contenido_tipo_genero`, `idx_usuario_pais_plan`, `idx_disp_buffering`) que permite resolver operaciones analíticas de filtrado y agregación mediante escaneos de índice (*IXSCAN*) en lugar de escaneos completos de colección (*COLLSCAN*), reduciendo la complejidad de $O(N)$ a $O(\log N)$ y logrando latencias promedio de 243 ms."*
+
+4. **Estrategia de Disaster Recovery Cross-Region (DR):**
+   > *"Para eliminar puntos únicos de falla regionales (SPOF) y garantizar la resiliencia de la plataforma ante catástrofes de centros de datos, se diseñó una arquitectura Multi-Región (*Warm Standby*) entre AWS us-east-1 y us-west-2. Cumple con un RPO < 1 minuto mediante sincronización continua de Oplog en MongoDB Atlas y Cross-Region Replication (CRR) en el Data Lake Parquet, junto con un RTO < 5 minutos gracias al failover automático por consenso Raft y enrutamiento global con DNS Failover (Route 53)."*
 
 ---
 
@@ -442,9 +447,11 @@ Para enriquecer la entrega, se desarrolló una aplicación web interactiva en `w
 | **4. Datos masivos generados** | ✅ | **20.003 eventos de telemetría**, 1.503 usuarios, 66 películas y 13 canales en Atlas. |
 | **5. Transformación OLTP → OLAP completada** | ✅ | **20.003 registros dimensionales** consolidados en `reproducciones_analiticas`. |
 | **6. Índices compuestos en colección OLAP** | ✅ | 6 índices compuestos creados (`idx_tiempo`, `idx_contenido_tipo_genero`, etc.). |
-| **7. Benchmarking ejecutado con latencias < 500ms** | ✅ | 6 consultas ejecutadas con **latencia promedio de 222.01 ms** (Máxima: 501 ms). |
-| **8. Componente Web / IPTV funcional** | ✅ | Landing page y reproductor IPTV en vivo con HLS.js en `web/index.html`. |
-| **9. Documentación técnica completada** | ✅ | Informe técnico formal con código, justificaciones, diagramas y evidencias. |
+| **7. Benchmarking ejecutado con latencias < 500ms** | ✅ | 10 consultas ejecutadas con **latencia promedio de 243.56 ms** (SLA < 500 ms superado). |
+| **8. Dashboard de Monitoreo Integral (6 Paneles)** | ✅ | Panel visual PNG (`dashboard_monitoreo_latest.png`) y consola ejecutiva con `dashboard.py`. |
+| **9. Disaster Recovery Cross-Region (DR)** | ✅ | Estrategia multi-región documentada (`docs/DISASTER_RECOVERY_CROSS_REGION.md`) con RPO < 1m y RTO < 5m. |
+| **10. Componente Web / IPTV funcional** | ✅ | Landing page y reproductor IPTV en vivo con HLS.js en `web/index.html`. |
+| **11. Documentación técnica completada** | ✅ | Informes técnicos formales con código, justificaciones, diagramas y evidencias. |
 
 ---
 

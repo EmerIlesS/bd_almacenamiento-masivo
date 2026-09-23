@@ -209,3 +209,4 @@ Todas las consultas se ejecutan con `allowDiskUse: true` e índices compuestos d
 ## 📄 Documentación Técnica Completa
 - 📘 **Informe Oficial del Parcial (Primer Corte):** [docs/INFORME_PARCIAL_HYPERFLIX.md](docs/INFORME_PARCIAL_HYPERFLIX.md)
 - 📗 **Diseño de Arquitectura General (Semanas 1 y 2):** [docs/ARQUITECTURA_HYPERFLIX.md](docs/ARQUITECTURA_HYPERFLIX.md)
+- 🛡️ **Estrategia de Disaster Recovery Cross-Region (DR):** [docs/DISASTER_RECOVERY_CROSS_REGION.md](docs/DISASTER_RECOVERY_CROSS_REGION.md)
