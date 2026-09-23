@@ -426,6 +426,7 @@ El repositorio cuenta con la implementación ejecutable completa que valida esta
 | **Data Lake Parquet (Fase 2)** | `data_lake.py` | Pipeline oficial de Data Lake (Atlas ➔ Pandas ➔ Parquet Snappy en zonas `raw`, `processed`, `curated`). |
 | **Consumidor CDC (Spark Streaming)** | `scripts/consumidor_streaming_cdc.py` | Consumidor reactivo con Change Streams que procesa, enriquece y detecta anomalías QoS en tiempo real. |
 | **Productor Streaming (Kafka)** | `scripts/productor_streaming.py` | Emisor continuo de telemetría de streaming y eventos de usuario hacia MongoDB Atlas. |
+| **Infraestructura como Código (IaC)** | `terraform/` + `infraestructura.py` | Definición declarativa de clúster Atlas Multi-Región y S3 Data Lake CRR con script de automatización. |
 | **Plataforma Web & IPTV** | `web/index.html` + `web/app.js` | Landing page, catálogo interactivo, reproductor IPTV en vivo vía HLS y monitor de telemetría. |
 
 ---

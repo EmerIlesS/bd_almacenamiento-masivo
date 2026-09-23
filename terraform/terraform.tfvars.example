@@ -1,0 +1,28 @@
+# =============================================================================
+# EJEMPLO DE VARIABLES DE TERRAFORM (Copiar a terraform.tfvars)
+# =============================================================================
+
+# Credenciales de API de MongoDB Atlas (Generadas en Atlas ➔ Access Manager ➔ API Keys)
+atlas_public_key  = "tu_public_key_aqui"
+atlas_private_key = "tu_private_key_aqui"
+atlas_org_id      = "650abc123def456789012345"
+
+# Parámetros del Negocio
+project_name = "HYPERFLIX-Streaming-Platform"
+cluster_name = "hyperflix-cluster-prod"
+cluster_tier = "M10"
+
+# Regiones Geográficas (Estrategia Disaster Recovery Cross-Region)
+primary_region = "US_EAST_1"
+dr_region      = "US_WEST_2"
+
+# Usuario de la Base de Datos
+db_username = "hyperflix_admin"
+db_password = "SuperPasswordSeguro2026!"
+
+# Seguridad y Firewall
+ip_whitelist = [
+  "0.0.0.0/0" # Para pruebas de laboratorio. En producción reemplazar por IPs estáticas
+]
+
+environment = "production"

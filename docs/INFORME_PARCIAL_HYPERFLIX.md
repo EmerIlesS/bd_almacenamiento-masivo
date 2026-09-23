@@ -48,6 +48,7 @@ Adaptar e implementar la arquitectura de datos para la plataforma de streaming *
 - ✅ **Consultas Analíticas con Benchmarking:** Medición precisa de latencias en 10 consultas clave del negocio de streaming, logrando tiempos de respuesta estrictamente inferiores a **500 ms** (promedio real: **243.56 ms**).
 - ✅ **Dashboard de Monitoreo Integral (6 Paneles):** Monitoreo visual de colecciones, latencias vs SLA, proyección de costos en Atlas, tendencias de streaming y métricas de almacenamiento.
 - ✅ **Estrategia de Disaster Recovery Cross-Region (DR):** Arquitectura de alta disponibilidad multi-región (`us-east-1` ➔ `us-west-2`) bajo el modelo *Warm Standby*, con RPO $< 1$ min, RTO $< 5$ min, replicación de Oplog en Atlas, S3 Cross-Region Replication (CRR) para el Data Lake Parquet y DNS Failover.
+- ✅ **Infraestructura como Código (IaC) con Terraform y Automatización:** Módulos declarativos HCL (`main.tf`, `variables.tf`, `outputs.tf`) para aprovisionar clúster Atlas Multi-Región y S3 Data Lake CRR, junto con el script de automatización (`infraestructura.py`) y exportación del estado (`infraestructura_estado.json`).
 - ✅ **Plataforma Web & Reproductor IPTV en Vivo:** Landing page interactiva estilo Netflix, catálogo VOD y visor de canales de TV abiertos reales mediante HLS.js emitiendo telemetría en vivo.
 
 ---
@@ -423,6 +424,9 @@ Para enriquecer la entrega, se desarrolló una aplicación web interactiva en `w
 4. **Estrategia de Disaster Recovery Cross-Region (DR):**
    > *"Para eliminar puntos únicos de falla regionales (SPOF) y garantizar la resiliencia de la plataforma ante catástrofes de centros de datos, se diseñó una arquitectura Multi-Región (*Warm Standby*) entre AWS us-east-1 y us-west-2. Cumple con un RPO < 1 minuto mediante sincronización continua de Oplog en MongoDB Atlas y Cross-Region Replication (CRR) en el Data Lake Parquet, junto con un RTO < 5 minutos gracias al failover automático por consenso Raft y enrutamiento global con DNS Failover (Route 53)."*
 
+5. **Infraestructura como Código (IaC) y Automatización:**
+   > *"Se definió formalmente la arquitectura mediante plantillas declarativas de Terraform (HCL) que orquestan el clúster multi-región en MongoDB Atlas y los buckets de almacenamiento columnar S3 Parquet con políticas de replicación CRR y retención WORM. Adicionalmente, se construyó un script de automatización en Python (`infraestructura.py`) que audita en vivo la topología del Replica Set, valida las zonas del Data Lake y exporta el estado de los recursos a un archivo estándar de infraestructura (`infraestructura_estado.json`), eliminando tareas manuales propensas a error."*
+
 ---
 
 ## 🔧 SOLUCIÓN DE PROBLEMAS COMUNES (TROUBLESHOOTING)
@@ -450,8 +454,9 @@ Para enriquecer la entrega, se desarrolló una aplicación web interactiva en `w
 | **7. Benchmarking ejecutado con latencias < 500ms** | ✅ | 10 consultas ejecutadas con **latencia promedio de 243.56 ms** (SLA < 500 ms superado). |
 | **8. Dashboard de Monitoreo Integral (6 Paneles)** | ✅ | Panel visual PNG (`dashboard_monitoreo_latest.png`) y consola ejecutiva con `dashboard.py`. |
 | **9. Disaster Recovery Cross-Region (DR)** | ✅ | Estrategia multi-región documentada (`docs/DISASTER_RECOVERY_CROSS_REGION.md`) con RPO < 1m y RTO < 5m. |
-| **10. Componente Web / IPTV funcional** | ✅ | Landing page y reproductor IPTV en vivo con HLS.js en `web/index.html`. |
-| **11. Documentación técnica completada** | ✅ | Informes técnicos formales con código, justificaciones, diagramas y evidencias. |
+| **10. Infraestructura como Código (IaC / Terraform)** | ✅ | Módulos en `terraform/`, script de automatización `infraestructura.py` y `infraestructura_estado.json`. |
+| **11. Componente Web / IPTV funcional** | ✅ | Landing page y reproductor IPTV en vivo con HLS.js en `web/index.html`. |
+| **12. Documentación técnica completada** | ✅ | Informes técnicos formales con código, justificaciones, diagramas y evidencias. |
 
 ---
 

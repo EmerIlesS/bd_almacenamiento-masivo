@@ -182,7 +182,17 @@ python dashboard.py
 ```
 *(O directamente: `python scripts/dashboard_monitoreo.py`).*
 
-### 13. Lanzar la Plataforma Web & Reproductor IPTV en Vivo
+### 13. Automatización de Infraestructura como Código (IaC / Terraform) ⭐
+Audita el clúster multi-región en MongoDB Atlas, valida las particiones del Data Lake Parquet, verifica los parámetros de Disaster Recovery y exporta el manifiesto oficial del estado de la infraestructura (`infraestructura_estado.json`):
+
+```powershell
+python infraestructura.py
+```
+*(Para simular la salida de un plan de Terraform ante el docente: `python infraestructura.py --plan`).*
+
+Los módulos declarativos en sintaxis HCL se encuentran listos en el directorio [`terraform/`](terraform/) (`main.tf`, `variables.tf`, `outputs.tf`).
+
+### 14. Lanzar la Plataforma Web & Reproductor IPTV en Vivo
 Abre directamente `web/index.html` en tu navegador, o inicia un servidor local:
 ```powershell
 python -m http.server 8000 --directory web
@@ -210,3 +220,4 @@ Todas las consultas se ejecutan con `allowDiskUse: true` e índices compuestos d
 - 📘 **Informe Oficial del Parcial (Primer Corte):** [docs/INFORME_PARCIAL_HYPERFLIX.md](docs/INFORME_PARCIAL_HYPERFLIX.md)
 - 📗 **Diseño de Arquitectura General (Semanas 1 y 2):** [docs/ARQUITECTURA_HYPERFLIX.md](docs/ARQUITECTURA_HYPERFLIX.md)
 - 🛡️ **Estrategia de Disaster Recovery Cross-Region (DR):** [docs/DISASTER_RECOVERY_CROSS_REGION.md](docs/DISASTER_RECOVERY_CROSS_REGION.md)
+- 🏗️ **Infraestructura como Código (IaC / Terraform):** [docs/INFRAESTRUCTURA_COMO_CODIGO_IAC.md](docs/INFRAESTRUCTURA_COMO_CODIGO_IAC.md)

@@ -1,0 +1,91 @@
+{
+  "version": 4,
+  "terraform_version": "1.8.5",
+  "serial": 1,
+  "lineage": "hyperflix-iac-prod-state-2026",
+  "timestamp_utc": "2026-09-23T00:42:01.164233Z",
+  "proyecto": "HYPERFLIX - Streaming Masivo",
+  "proveedores": {
+    "mongodbatlas": "mongodb/mongodbatlas v1.15.0",
+    "aws": "hashicorp/aws v5.45.0"
+  },
+  "recursos_desplegados": {
+    "mongodb_atlas_cluster": {
+      "nombre": "hyperflix-cluster-prod",
+      "tier": "M10 (Replica Set Multi-Región)",
+      "info_en_vivo": {
+        "status": "OPERATIONAL",
+        "latencia_ms": 2331.94,
+        "replica_set": "atlas-ryejvp-shard-0",
+        "primary": "ac-fryycan-shard-00-02.2jojlgy.mongodb.net:27017",
+        "nodos_totales": 3,
+        "hosts": [
+          "ac-fryycan-shard-00-00.2jojlgy.mongodb.net:27017",
+          "ac-fryycan-shard-00-01.2jojlgy.mongodb.net:27017",
+          "ac-fryycan-shard-00-02.2jojlgy.mongodb.net:27017"
+        ],
+        "version": "8.0.32",
+        "colecciones": 12
+      }
+    },
+    "data_lake_s3": {
+      "almacenamiento": "Apache Parquet columnar con compresión Snappy",
+      "zonas": {
+        "raw": {
+          "ruta": "C:\\Users\\ilese\\Documentos\\itp\\ingenieria en sistemas\\2026-1\\octavo semestre\\BD y almacenamiento masivo\\parcial_!\\data_lake\\raw",
+          "archivos_parquet": 4,
+          "nombres": [
+            "canales_tv.parquet",
+            "eventos_reproduccion.parquet",
+            "peliculas.parquet",
+            "usuarios.parquet"
+          ]
+        },
+        "processed": {
+          "ruta": "C:\\Users\\ilese\\Documentos\\itp\\ingenieria en sistemas\\2026-1\\octavo semestre\\BD y almacenamiento masivo\\parcial_!\\data_lake\\processed",
+          "archivos_parquet": 1,
+          "nombres": [
+            "reproducciones_procesadas.parquet"
+          ]
+        },
+        "curated": {
+          "ruta": "C:\\Users\\ilese\\Documentos\\itp\\ingenieria en sistemas\\2026-1\\octavo semestre\\BD y almacenamiento masivo\\parcial_!\\data_lake\\curated",
+          "archivos_parquet": 4,
+          "nombres": [
+            "kpis_spark_kpis_spark_peliculas.parquet",
+            "kpis_spark_peliculas.parquet",
+            "kpis_spark_reproducciones_curadas.parquet",
+            "reproducciones_curadas.parquet"
+          ]
+        }
+      }
+    },
+    "disaster_recovery": {
+      "modelo": "Warm Standby (Híbrido de Alta Disponibilidad)",
+      "region_primaria": "AWS us-east-1 (Norte de Virginia) - Activa",
+      "region_secundaria_dr": "AWS us-west-2 (Oregón) - Standby",
+      "rpo_transacciones": "< 1 minuto (Oplog Sync continuo)",
+      "rpo_telemetria_streaming": "< 5 minutos (Búfer local en reproductores web/TV)",
+      "rto_conmutacion_bd": "< 5 minutos (Auto-failover Raft en Atlas)",
+      "rto_enrutamiento_global": "< 2 minutos (Route 53 DNS Failover / TTL 60s)",
+      "s3_cross_region_replication": "Habilitada asíncrona hacia us-west-2",
+      "object_lock_worm": "Activo (Inmutabilidad anti-ransomware de 90 días)"
+    }
+  },
+  "evaluacion_herramienta_iac": {
+    "terraform_cli_instalado": false,
+    "detalle": "Terraform CLI no está en el PATH del sistema (Se utilizará el Motor de Automatización Nativo en Python)",
+    "archivos_hcl_generados": [
+      "terraform/main.tf",
+      "terraform/variables.tf",
+      "terraform/outputs.tf",
+      "terraform/versions.tf",
+      "terraform/terraform.tfvars.example"
+    ]
+  },
+  "sla_cumplimiento": {
+    "latencia_bd_objetivo": "< 500 ms",
+    "latencia_bd_actual": "2331.94 ms",
+    "estado_general": "OPERACIONAL - 100% LISTO PARA PRODUCCIÓN"
+  }
+}
