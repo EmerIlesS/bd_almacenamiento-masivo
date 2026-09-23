@@ -114,23 +114,8 @@ def generar_dashboard_monitoreo():
         horas_tendencia = [round(d["total_minutos"] / 60, 1) for d in docs_tendencia]
     else:
         fechas_tendencia = ["2026-09"]
-        horas_tendencia = [23674.6]
+        horas_tendencia = [1908.6]
         meses_con_datos = 1
-        
-    # Si solo hay 1 mes real generado, expandir tendencia histórica simulada (como en el aula)
-    if len(fechas_tendencia) == 1:
-        fechas_simuladas = [
-            "2025-09", "2025-10", "2025-11", "2025-12",
-            "2026-01", "2026-02", "2026-03", "2026-04",
-            "2026-05", "2026-06", "2026-07", "2026-08", "2026-09"
-        ]
-        valores_simulados = [
-            49500, 65200, 63800, 66100, 58900, 65900,
-            62100, 62400, 64200, 64100, 64500, 14200, 23674
-        ]
-        fechas_tendencia = fechas_simuladas
-        horas_tendencia = valores_simulados
-        meses_con_datos = len(fechas_tendencia)
 
     # -------------------------------------------------------------------------
     # 4. Generación de Gráficos con Matplotlib (Grid 2 x 3)
@@ -186,7 +171,7 @@ def generar_dashboard_monitoreo():
     ax4 = axes[1, 0]
     ax4.plot(fechas_tendencia, horas_tendencia, marker='o', color='#e74c3c', linewidth=2, markersize=5)
     ax4.set_title("Tendencia de Streaming Mensual", fontsize=12, fontweight='bold')
-    ax4.set_ylabel("Horas Reproducidas (Miles)", fontsize=10)
+    ax4.set_ylabel("Horas Reproducidas", fontsize=10)
     ax4.set_xlabel("Fecha (Año-Mes)", fontsize=9)
     ax4.tick_params(axis='x', rotation=45, labelsize=8)
     ax4.grid(True, linestyle=':', alpha=0.6)
