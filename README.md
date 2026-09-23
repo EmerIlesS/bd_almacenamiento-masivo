@@ -192,7 +192,20 @@ python infraestructura.py
 
 Los módulos declarativos en sintaxis HCL se encuentran listos en el directorio [`terraform/`](terraform/) (`main.tf`, `variables.tf`, `outputs.tf`).
 
-### 14. Lanzar la Plataforma Web & Reproductor IPTV en Vivo
+### 14. Generar Catálogo y Diccionario de Datos Automatizado ⭐
+Inspecciona dinámicamente las 12 colecciones de MongoDB Atlas y las 9 particiones Parquet del Data Lake, extrayendo tipos BSON/Arrow, restricciones, índices, gobernanza/PII y linaje de datos:
+
+```powershell
+python catalogo_datos.py
+```
+*(O directamente: `python scripts/generar_diccionario_datos.py`).*
+
+Genera automáticamente:
+- 📘 Diccionario Markdown formal: [`docs/DICCIONARIO_DE_DATOS.md`](docs/DICCIONARIO_DE_DATOS.md)
+- 🌐 Portal Web Interactivo con Tailwind CSS: [`catalogo_datos.html`](catalogo_datos.html)
+- ⚙️ Catálogo de Metadatos JSON estándar: [`catalogo_datos.json`](catalogo_datos.json)
+
+### 15. Lanzar la Plataforma Web & Reproductor IPTV en Vivo
 Abre directamente `web/index.html` en tu navegador, o inicia un servidor local:
 ```powershell
 python -m http.server 8000 --directory web
@@ -221,3 +234,4 @@ Todas las consultas se ejecutan con `allowDiskUse: true` e índices compuestos d
 - 📗 **Diseño de Arquitectura General (Semanas 1 y 2):** [docs/ARQUITECTURA_HYPERFLIX.md](docs/ARQUITECTURA_HYPERFLIX.md)
 - 🛡️ **Estrategia de Disaster Recovery Cross-Region (DR):** [docs/DISASTER_RECOVERY_CROSS_REGION.md](docs/DISASTER_RECOVERY_CROSS_REGION.md)
 - 🏗️ **Infraestructura como Código (IaC / Terraform):** [docs/INFRAESTRUCTURA_COMO_CODIGO_IAC.md](docs/INFRAESTRUCTURA_COMO_CODIGO_IAC.md)
+- 📚 **Catálogo y Diccionario Oficial de Datos:** [docs/DICCIONARIO_DE_DATOS.md](docs/DICCIONARIO_DE_DATOS.md) y [`catalogo_datos.html`](catalogo_datos.html)

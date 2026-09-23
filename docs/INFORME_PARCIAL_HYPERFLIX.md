@@ -49,6 +49,7 @@ Adaptar e implementar la arquitectura de datos para la plataforma de streaming *
 - ✅ **Dashboard de Monitoreo Integral (6 Paneles):** Monitoreo visual de colecciones, latencias vs SLA, proyección de costos en Atlas, tendencias de streaming y métricas de almacenamiento.
 - ✅ **Estrategia de Disaster Recovery Cross-Region (DR):** Arquitectura de alta disponibilidad multi-región (`us-east-1` ➔ `us-west-2`) bajo el modelo *Warm Standby*, con RPO $< 1$ min, RTO $< 5$ min, replicación de Oplog en Atlas, S3 Cross-Region Replication (CRR) para el Data Lake Parquet y DNS Failover.
 - ✅ **Infraestructura como Código (IaC) con Terraform y Automatización:** Módulos declarativos HCL (`main.tf`, `variables.tf`, `outputs.tf`) para aprovisionar clúster Atlas Multi-Región y S3 Data Lake CRR, junto con el script de automatización (`infraestructura.py`) y exportación del estado (`infraestructura_estado.json`).
+- ✅ **Catálogo y Diccionario de Datos Automatizado:** Extracción dinámica de metadatos de 12 colecciones Atlas y 9 particiones Parquet mediante script en Python (`catalogo_datos.py`), exportando documentación formal en Markdown (`docs/DICCIONARIO_DE_DATOS.md`), metadatos JSON estándar y portal web interactivo (`catalogo_datos.html`).
 - ✅ **Plataforma Web & Reproductor IPTV en Vivo:** Landing page interactiva estilo Netflix, catálogo VOD y visor de canales de TV abiertos reales mediante HLS.js emitiendo telemetría en vivo.
 
 ---
@@ -427,6 +428,9 @@ Para enriquecer la entrega, se desarrolló una aplicación web interactiva en `w
 5. **Infraestructura como Código (IaC) y Automatización:**
    > *"Se definió formalmente la arquitectura mediante plantillas declarativas de Terraform (HCL) que orquestan el clúster multi-región en MongoDB Atlas y los buckets de almacenamiento columnar S3 Parquet con políticas de replicación CRR y retención WORM. Adicionalmente, se construyó un script de automatización en Python (`infraestructura.py`) que audita en vivo la topología del Replica Set, valida las zonas del Data Lake y exporta el estado de los recursos a un archivo estándar de infraestructura (`infraestructura_estado.json`), eliminando tareas manuales propensas a error."*
 
+6. **Catálogo y Diccionario de Datos Automatizado:**
+   > *"Para garantizar la gobernanza de datos, la clasificación de sensibilidad (PII/Habeas Data) y el autoservicio analítico, se implementó un motor de introspección (`catalogo_datos.py`) que analiza en tiempo real las 12 colecciones de MongoDB Atlas y las 9 particiones Parquet del Data Lake. Genera automáticamente un Diccionario de Datos exhaustivo en Markdown (`docs/DICCIONARIO_DE_DATOS.md`), metadatos JSON estándar y un portal HTML interactivo (`catalogo_datos.html`), garantizando que la documentación nunca quede desactualizada frente a los cambios de esquema."*
+
 ---
 
 ## 🔧 SOLUCIÓN DE PROBLEMAS COMUNES (TROUBLESHOOTING)
@@ -455,8 +459,9 @@ Para enriquecer la entrega, se desarrolló una aplicación web interactiva en `w
 | **8. Dashboard de Monitoreo Integral (6 Paneles)** | ✅ | Panel visual PNG (`dashboard_monitoreo_latest.png`) y consola ejecutiva con `dashboard.py`. |
 | **9. Disaster Recovery Cross-Region (DR)** | ✅ | Estrategia multi-región documentada (`docs/DISASTER_RECOVERY_CROSS_REGION.md`) con RPO < 1m y RTO < 5m. |
 | **10. Infraestructura como Código (IaC / Terraform)** | ✅ | Módulos en `terraform/`, script de automatización `infraestructura.py` y `infraestructura_estado.json`. |
-| **11. Componente Web / IPTV funcional** | ✅ | Landing page y reproductor IPTV en vivo con HLS.js en `web/index.html`. |
-| **12. Documentación técnica completada** | ✅ | Informes técnicos formales con código, justificaciones, diagramas y evidencias. |
+| **11. Catálogo y Diccionario de Datos** | ✅ | Script dinámico `catalogo_datos.py`, `docs/DICCIONARIO_DE_DATOS.md`, JSON y `catalogo_datos.html`. |
+| **12. Componente Web / IPTV funcional** | ✅ | Landing page y reproductor IPTV en vivo con HLS.js en `web/index.html`. |
+| **13. Documentación técnica completada** | ✅ | Informes técnicos formales con código, justificaciones, diagramas y evidencias. |
 
 ---
 

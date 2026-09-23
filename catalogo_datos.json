@@ -1,0 +1,2518 @@
+{
+  "metadata": {
+    "proyecto": "HYPERFLIX - Streaming Masivo",
+    "version": "1.0.0",
+    "timestamp": "2026-09-23T01:00:45.424865Z",
+    "estandar_gobernanza": "Apache Atlas / OpenMetadata Specification",
+    "total_colecciones_atlas": 12,
+    "total_archivos_parquet": 9
+  },
+  "mongodb_atlas": {
+    "canales_tv": {
+      "nombre": "canales_tv",
+      "capa": "Transaccional / Ingesta (OLTP)",
+      "total_documentos": 13,
+      "total_campos": 11,
+      "indices": [
+        {
+          "nombre": "_id_",
+          "campos": [
+            "_id"
+          ],
+          "es_unico": false,
+          "tipo": "Simple"
+        },
+        {
+          "nombre": "idx_codigo_canal",
+          "campos": [
+            "codigo_canal"
+          ],
+          "es_unico": true,
+          "tipo": "Único"
+        },
+        {
+          "nombre": "idx_canal_categoria_pais",
+          "campos": [
+            "categoria",
+            "pais"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        }
+      ],
+      "campos": [
+        {
+          "campo": "_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "restriccion": "Clave Primaria",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac2d59c70dc61ee2cb5"
+        },
+        {
+          "campo": "codigo_canal",
+          "tipo": "String (Varchar)",
+          "descripcion": "Identificador único del canal de televisión en vivo (IPTV-XXX).",
+          "restriccion": "Único / Indexado",
+          "sensibilidad": "Pública",
+          "ejemplo": "IPTV-001"
+        },
+        {
+          "campo": "nombre",
+          "tipo": "String (Varchar)",
+          "descripcion": "Nombre completo o alias del suscriptor de la plataforma.",
+          "restriccion": "Requerido",
+          "sensibilidad": "Confidencial (PII)",
+          "ejemplo": "France 24 Español"
+        },
+        {
+          "campo": "categoria",
+          "tipo": "String (Varchar)",
+          "descripcion": "Categoría temática de la señal: Noticias, Deportes, Cultura, Música, General.",
+          "restriccion": "Indexado",
+          "sensibilidad": "Pública",
+          "ejemplo": "Noticias"
+        },
+        {
+          "campo": "pais",
+          "tipo": "String (Varchar)",
+          "descripcion": "País de residencia del usuario para segmentación geográfica de catálogo.",
+          "restriccion": "Indexado",
+          "sensibilidad": "Interna",
+          "ejemplo": "Francia / Internacional"
+        },
+        {
+          "campo": "idioma",
+          "tipo": "String (Varchar)",
+          "descripcion": "Idioma principal de la transmisión en vivo.",
+          "restriccion": "Informativo",
+          "sensibilidad": "Pública",
+          "ejemplo": "Español"
+        },
+        {
+          "campo": "url_stream",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad canales_tv.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "https://raw.githubusercontent.com/iptv-org/iptv..."
+        },
+        {
+          "campo": "stream_hls_directo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad canales_tv.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "https://f24hls-i.akamaihd.net/hls/live/221193/F..."
+        },
+        {
+          "campo": "logo_url",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad canales_tv.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "https://upload.wikimedia.org/wikipedia/commons/..."
+        },
+        {
+          "campo": "activo",
+          "tipo": "Boolean",
+          "descripcion": "Flag booleano que indica si la señal se encuentra al aire.",
+          "restriccion": "Booleano",
+          "sensibilidad": "Interna",
+          "ejemplo": "True"
+        },
+        {
+          "campo": "tipo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad canales_tv.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "IPTV Público Libre"
+        }
+      ]
+    },
+    "dim_contenido": {
+      "nombre": "dim_contenido",
+      "capa": "Data Warehouse - Dimensión (OLAP)",
+      "total_documentos": 79,
+      "total_campos": 10,
+      "indices": [
+        {
+          "nombre": "_id_",
+          "campos": [
+            "_id"
+          ],
+          "es_unico": false,
+          "tipo": "Simple"
+        }
+      ],
+      "campos": [
+        {
+          "campo": "_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "restriccion": "Clave Primaria",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1ab165037070afee35a2c"
+        },
+        {
+          "campo": "titulo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Nombre comercial de la película o contenido bajo demanda.",
+          "restriccion": "Requerido",
+          "sensibilidad": "Pública",
+          "ejemplo": "El Laberinto Eterno"
+        },
+        {
+          "campo": "tipo_contenido",
+          "tipo": "String (Varchar)",
+          "descripcion": "Tipo de transmisión: PELICULA_VOD o CANAL_TV_IPTV.",
+          "restriccion": "Indexado",
+          "sensibilidad": "Interna",
+          "ejemplo": "Pelicula"
+        },
+        {
+          "campo": "genero_o_categoria",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad dim_contenido.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Comedia"
+        },
+        {
+          "campo": "anio_estreno",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad dim_contenido.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "2015"
+        },
+        {
+          "campo": "total_reproducciones",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad dim_contenido.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "250"
+        },
+        {
+          "campo": "contenido_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Identificador del contenido audiovisual sintonizado.",
+          "restriccion": "Clave Foránea",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1ab165037070afee35a2c"
+        },
+        {
+          "campo": "minutos_totales",
+          "tipo": "Double / Float",
+          "descripcion": "Campo operacional de la entidad dim_contenido.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "24214.7"
+        },
+        {
+          "campo": "porcentaje_completitud_promedio",
+          "tipo": "Double / Float",
+          "descripcion": "Campo operacional de la entidad dim_contenido.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "60.9"
+        },
+        {
+          "campo": "bitrate_promedio_kbps",
+          "tipo": "Double / Float",
+          "descripcion": "Campo operacional de la entidad dim_contenido.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "9745.0"
+        }
+      ]
+    },
+    "dim_dispositivo": {
+      "nombre": "dim_dispositivo",
+      "capa": "Data Warehouse - Dimensión (OLAP)",
+      "total_documentos": 9,
+      "total_campos": 7,
+      "indices": [
+        {
+          "nombre": "_id_",
+          "campos": [
+            "_id"
+          ],
+          "es_unico": false,
+          "tipo": "Simple"
+        }
+      ],
+      "campos": [
+        {
+          "campo": "_id",
+          "tipo": "String (Varchar)",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "restriccion": "Clave Primaria",
+          "sensibilidad": "Interna",
+          "ejemplo": "PC Web Safari"
+        },
+        {
+          "campo": "sistema_operativo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad dim_dispositivo.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "macOS Sonoma"
+        },
+        {
+          "campo": "resolucion_max",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad dim_dispositivo.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "2560x1440 (2K)"
+        },
+        {
+          "campo": "total_sesiones",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Conteo agregado de sesiones de streaming en la ventana temporal.",
+          "restriccion": "Métrica Acumulada",
+          "sensibilidad": "Interna",
+          "ejemplo": "2881"
+        },
+        {
+          "campo": "tipo_dispositivo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad dim_dispositivo.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "PC Web Safari"
+        },
+        {
+          "campo": "latencia_promedio_ms",
+          "tipo": "Double / Float",
+          "descripcion": "Campo operacional de la entidad dim_dispositivo.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "65.9"
+        },
+        {
+          "campo": "bitrate_promedio_kbps",
+          "tipo": "Double / Float",
+          "descripcion": "Campo operacional de la entidad dim_dispositivo.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "9916.0"
+        }
+      ]
+    },
+    "dim_tiempo": {
+      "nombre": "dim_tiempo",
+      "capa": "Data Warehouse - Dimensión (OLAP)",
+      "total_documentos": 425,
+      "total_campos": 10,
+      "indices": [
+        {
+          "nombre": "_id_",
+          "campos": [
+            "_id"
+          ],
+          "es_unico": false,
+          "tipo": "Simple"
+        }
+      ],
+      "campos": [
+        {
+          "campo": "_id",
+          "tipo": "Timestamp (ISO 8601)",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "restriccion": "Clave Primaria",
+          "sensibilidad": "Interna",
+          "ejemplo": "2026-09-09 13:48:32"
+        },
+        {
+          "campo": "fecha",
+          "tipo": "Timestamp (ISO 8601)",
+          "descripcion": "Campo operacional de la entidad dim_tiempo.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "2026-09-09 13:48:32"
+        },
+        {
+          "campo": "anio",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad dim_tiempo.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "2026"
+        },
+        {
+          "campo": "mes",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad dim_tiempo.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "9"
+        },
+        {
+          "campo": "dia",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad dim_tiempo.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "9"
+        },
+        {
+          "campo": "hora",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad dim_tiempo.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "13"
+        },
+        {
+          "campo": "dia_semana",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad dim_tiempo.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "4"
+        },
+        {
+          "campo": "trimestre",
+          "tipo": "Double / Float",
+          "descripcion": "Trimestre del año (Q1, Q2, Q3, Q4) calculado con $ceil y $divide.",
+          "restriccion": "Atributo Dimensión",
+          "sensibilidad": "Interna",
+          "ejemplo": "3.0"
+        },
+        {
+          "campo": "es_fin_de_semana",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad dim_tiempo.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "No"
+        },
+        {
+          "campo": "es_hora_pico",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad dim_tiempo.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "No"
+        }
+      ]
+    },
+    "dim_usuario": {
+      "nombre": "dim_usuario",
+      "capa": "Data Warehouse - Dimensión (OLAP)",
+      "total_documentos": 1503,
+      "total_campos": 12,
+      "indices": [
+        {
+          "nombre": "_id_",
+          "campos": [
+            "_id"
+          ],
+          "es_unico": false,
+          "tipo": "Simple"
+        }
+      ],
+      "campos": [
+        {
+          "campo": "_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "restriccion": "Clave Primaria",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1ab175037070afee35c73"
+        },
+        {
+          "campo": "codigo_usuario",
+          "tipo": "String (Varchar)",
+          "descripcion": "Código único de negocio asignado al suscriptor (USR-XXXXX).",
+          "restriccion": "Único / Indexado",
+          "sensibilidad": "Interna",
+          "ejemplo": "USR-10571"
+        },
+        {
+          "campo": "nombre",
+          "tipo": "String (Varchar)",
+          "descripcion": "Nombre completo o alias del suscriptor de la plataforma.",
+          "restriccion": "Requerido",
+          "sensibilidad": "Confidencial (PII)",
+          "ejemplo": "Dorotea Armengol Sebastián"
+        },
+        {
+          "campo": "pais",
+          "tipo": "String (Varchar)",
+          "descripcion": "País de residencia del usuario para segmentación geográfica de catálogo.",
+          "restriccion": "Indexado",
+          "sensibilidad": "Interna",
+          "ejemplo": "Colombia"
+        },
+        {
+          "campo": "ciudad",
+          "tipo": "String (Varchar)",
+          "descripcion": "Ciudad o municipio de residencia del suscriptor.",
+          "restriccion": "Opcional",
+          "sensibilidad": "Interna",
+          "ejemplo": "Bogotá"
+        },
+        {
+          "campo": "plan_suscripcion",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad dim_usuario.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Estándar HD"
+        },
+        {
+          "campo": "segmento",
+          "tipo": "String (Varchar)",
+          "descripcion": "Segmentación comercial del usuario: VIP, ESTUDIANTE, FREEMIUM, REGULAR.",
+          "restriccion": "Indexado",
+          "sensibilidad": "Interna",
+          "ejemplo": "Fin de Semana"
+        },
+        {
+          "campo": "total_sesiones",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Conteo agregado de sesiones de streaming en la ventana temporal.",
+          "restriccion": "Métrica Acumulada",
+          "sensibilidad": "Interna",
+          "ejemplo": "13"
+        },
+        {
+          "campo": "usuario_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Referencia al suscriptor titular de la cuenta.",
+          "restriccion": "Clave Foránea",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1ab175037070afee35c73"
+        },
+        {
+          "campo": "total_minutos_vistos",
+          "tipo": "Double / Float",
+          "descripcion": "Campo operacional de la entidad dim_usuario.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "977.0"
+        },
+        {
+          "campo": "promedio_minutos_sesion",
+          "tipo": "Double / Float",
+          "descripcion": "Campo operacional de la entidad dim_usuario.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "75.2"
+        },
+        {
+          "campo": "latencia_promedio_ms",
+          "tipo": "Double / Float",
+          "descripcion": "Campo operacional de la entidad dim_usuario.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "87.5"
+        }
+      ]
+    },
+    "eventos_reproduccion": {
+      "nombre": "eventos_reproduccion",
+      "capa": "Transaccional / Ingesta (OLTP)",
+      "total_documentos": 20008,
+      "total_campos": 18,
+      "indices": [
+        {
+          "nombre": "_id_",
+          "campos": [
+            "_id"
+          ],
+          "es_unico": false,
+          "tipo": "Simple"
+        },
+        {
+          "nombre": "idx_eventos_usr_time",
+          "campos": [
+            "usuario_id",
+            "timestamp"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        },
+        {
+          "nombre": "idx_eventos_content_type",
+          "campos": [
+            "contenido_id",
+            "tipo_evento"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        },
+        {
+          "nombre": "idx_eventos_timestamp",
+          "campos": [
+            "timestamp"
+          ],
+          "es_unico": false,
+          "tipo": "Simple"
+        }
+      ],
+      "campos": [
+        {
+          "campo": "_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "restriccion": "Clave Primaria",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac3d59c70dc61ee2cc3"
+        },
+        {
+          "campo": "codigo_evento",
+          "tipo": "String (Varchar)",
+          "descripcion": "Identificador único del evento de streaming emitido (EVT-XXXXX).",
+          "restriccion": "Único / Indexado",
+          "sensibilidad": "Interna",
+          "ejemplo": "EVT-0001"
+        },
+        {
+          "campo": "usuario_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Referencia al suscriptor titular de la cuenta.",
+          "restriccion": "Clave Foránea",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac2d59c70dc61ee2cba"
+        },
+        {
+          "campo": "contenido_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Identificador del contenido audiovisual sintonizado.",
+          "restriccion": "Clave Foránea",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac2d59c70dc61ee2caf"
+        },
+        {
+          "campo": "tipo_contenido",
+          "tipo": "String (Varchar)",
+          "descripcion": "Tipo de transmisión: PELICULA_VOD o CANAL_TV_IPTV.",
+          "restriccion": "Indexado",
+          "sensibilidad": "Interna",
+          "ejemplo": "Pelicula"
+        },
+        {
+          "campo": "tipo_evento",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad eventos_reproduccion.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "PLAY"
+        },
+        {
+          "campo": "dispositivo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Subdocumento con metadatos del reproductor: tipo, SO, navegador, app_version.",
+          "restriccion": "Objeto",
+          "sensibilidad": "Interna",
+          "ejemplo": "Smart TV Samsung"
+        },
+        {
+          "campo": "sistema_operativo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad eventos_reproduccion.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Tizen"
+        },
+        {
+          "campo": "timestamp",
+          "tipo": "Timestamp (ISO 8601)",
+          "descripcion": "Campo operacional de la entidad eventos_reproduccion.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "2026-09-09 10:51:47.656000"
+        },
+        {
+          "campo": "segundo_reproduccion",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad eventos_reproduccion.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "0"
+        },
+        {
+          "campo": "duracion_sesion_segundos",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad eventos_reproduccion.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "0"
+        },
+        {
+          "campo": "bitrate_kbps",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad eventos_reproduccion.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "15000"
+        },
+        {
+          "campo": "latencia_ms",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad eventos_reproduccion.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "42"
+        },
+        {
+          "campo": "resolucion",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad eventos_reproduccion.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "3840x2160 (4K)"
+        },
+        {
+          "campo": "duracion_total_contenido_segundos",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad eventos_reproduccion.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "4171"
+        },
+        {
+          "campo": "completado",
+          "tipo": "Boolean",
+          "descripcion": "Campo operacional de la entidad eventos_reproduccion.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "True"
+        },
+        {
+          "campo": "abandono",
+          "tipo": "Boolean",
+          "descripcion": "Campo operacional de la entidad eventos_reproduccion.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "False"
+        },
+        {
+          "campo": "eventos_buffering",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad eventos_reproduccion.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "0"
+        }
+      ]
+    },
+    "fact_reproducciones": {
+      "nombre": "fact_reproducciones",
+      "capa": "Data Warehouse - Tabla de Hechos (OLAP)",
+      "total_documentos": 20008,
+      "total_campos": 12,
+      "indices": [
+        {
+          "nombre": "_id_",
+          "campos": [
+            "_id"
+          ],
+          "es_unico": false,
+          "tipo": "Simple"
+        }
+      ],
+      "campos": [
+        {
+          "campo": "_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "restriccion": "Clave Primaria",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1abca0bc1b824f102857d"
+        },
+        {
+          "campo": "codigo_evento",
+          "tipo": "String (Varchar)",
+          "descripcion": "Identificador único del evento de streaming emitido (EVT-XXXXX).",
+          "restriccion": "Único / Indexado",
+          "sensibilidad": "Interna",
+          "ejemplo": "EVT-0001"
+        },
+        {
+          "campo": "fecha_id",
+          "tipo": "Timestamp (ISO 8601)",
+          "descripcion": "Clave subrogada de fecha en formato YYYYMMDD.",
+          "restriccion": "Clave Primaria Dimensión",
+          "sensibilidad": "Interna",
+          "ejemplo": "2026-09-09 10:51:47.656000"
+        },
+        {
+          "campo": "usuario_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Referencia al suscriptor titular de la cuenta.",
+          "restriccion": "Clave Foránea",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac2d59c70dc61ee2cba"
+        },
+        {
+          "campo": "contenido_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Identificador del contenido audiovisual sintonizado.",
+          "restriccion": "Clave Foránea",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac2d59c70dc61ee2caf"
+        },
+        {
+          "campo": "dispositivo_tipo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad fact_reproducciones.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Smart TV Samsung"
+        },
+        {
+          "campo": "tipo_evento",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad fact_reproducciones.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "PLAY"
+        },
+        {
+          "campo": "duracion_segundos",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Duración total de la película calculada en segundos para telemetría.",
+          "restriccion": "Técnico",
+          "sensibilidad": "Interna",
+          "ejemplo": "0"
+        },
+        {
+          "campo": "duracion_minutos",
+          "tipo": "Double / Float",
+          "descripcion": "Extensión total de la película expresada en minutos.",
+          "restriccion": "Requerido",
+          "sensibilidad": "Pública",
+          "ejemplo": "0.0"
+        },
+        {
+          "campo": "porcentaje_visto",
+          "tipo": "Double / Float",
+          "descripcion": "Campo operacional de la entidad fact_reproducciones.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "0.0"
+        },
+        {
+          "campo": "bitrate_kbps",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad fact_reproducciones.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "15000"
+        },
+        {
+          "campo": "latencia_ms",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad fact_reproducciones.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "42"
+        }
+      ]
+    },
+    "pagos": {
+      "nombre": "pagos",
+      "capa": "Transaccional / Ingesta (OLTP)",
+      "total_documentos": 137,
+      "total_campos": 8,
+      "indices": [
+        {
+          "nombre": "_id_",
+          "campos": [
+            "_id"
+          ],
+          "es_unico": false,
+          "tipo": "Simple"
+        },
+        {
+          "nombre": "idx_pago_usuario_fecha",
+          "campos": [
+            "usuario_id",
+            "fecha"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        }
+      ],
+      "campos": [
+        {
+          "campo": "_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "restriccion": "Clave Primaria",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac3d59c70dc61ee2cc0"
+        },
+        {
+          "campo": "codigo_pago",
+          "tipo": "String (Varchar)",
+          "descripcion": "Código único de la transacción en la pasarela de pagos (PAY-XXXXX).",
+          "restriccion": "Único / Indexado",
+          "sensibilidad": "Confidencial",
+          "ejemplo": "PAY-2026-0001"
+        },
+        {
+          "campo": "usuario_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Referencia al suscriptor titular de la cuenta.",
+          "restriccion": "Clave Foránea",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac2d59c70dc61ee2cba"
+        },
+        {
+          "campo": "suscripcion_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Referencia al contrato de suscripción asociado.",
+          "restriccion": "Clave Foránea",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac3d59c70dc61ee2cbd"
+        },
+        {
+          "campo": "monto",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad pagos.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "45000"
+        },
+        {
+          "campo": "metodo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad pagos.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Tarjeta de Crédito"
+        },
+        {
+          "campo": "fecha",
+          "tipo": "Timestamp (ISO 8601)",
+          "descripcion": "Campo operacional de la entidad pagos.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "2026-08-10 13:51:47.050000"
+        },
+        {
+          "campo": "estado",
+          "tipo": "String (Varchar)",
+          "descripcion": "Estado de la membresía: ACTIVA, CANCELADA, EN_MORA, PAUSADA.",
+          "restriccion": "Indexado",
+          "sensibilidad": "Interna",
+          "ejemplo": "Completado"
+        }
+      ]
+    },
+    "peliculas": {
+      "nombre": "peliculas",
+      "capa": "Transaccional / Ingesta (OLTP)",
+      "total_documentos": 66,
+      "total_campos": 13,
+      "indices": [
+        {
+          "nombre": "_id_",
+          "campos": [
+            "_id"
+          ],
+          "es_unico": false,
+          "tipo": "Simple"
+        },
+        {
+          "nombre": "idx_codigo_pelicula",
+          "campos": [
+            "codigo_pelicula"
+          ],
+          "es_unico": true,
+          "tipo": "Único"
+        },
+        {
+          "nombre": "idx_pelicula_genero_anio",
+          "campos": [
+            "genero",
+            "anio"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        }
+      ],
+      "campos": [
+        {
+          "campo": "_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "restriccion": "Clave Primaria",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac2d59c70dc61ee2caf"
+        },
+        {
+          "campo": "codigo_pelicula",
+          "tipo": "String (Varchar)",
+          "descripcion": "Código único del título audiovisual en el catálogo VOD (MOV-XXXXX).",
+          "restriccion": "Único / Indexado",
+          "sensibilidad": "Pública",
+          "ejemplo": "MOV-001"
+        },
+        {
+          "campo": "titulo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Nombre comercial de la película o contenido bajo demanda.",
+          "restriccion": "Requerido",
+          "sensibilidad": "Pública",
+          "ejemplo": "Inception"
+        },
+        {
+          "campo": "genero",
+          "tipo": "String (Varchar)",
+          "descripcion": "Género cinematográfico principal (Acción, Ciencia Ficción, Drama, Terror, etc.).",
+          "restriccion": "Indexado",
+          "sensibilidad": "Pública",
+          "ejemplo": "Ciencia Ficción"
+        },
+        {
+          "campo": "duracion_minutos",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Extensión total de la película expresada en minutos.",
+          "restriccion": "Requerido",
+          "sensibilidad": "Pública",
+          "ejemplo": "148"
+        },
+        {
+          "campo": "anio",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad peliculas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "2010"
+        },
+        {
+          "campo": "clasificacion",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad peliculas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "PG-13"
+        },
+        {
+          "campo": "director",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad peliculas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Christopher Nolan"
+        },
+        {
+          "campo": "rating_promedio",
+          "tipo": "Double / Float",
+          "descripcion": "Campo operacional de la entidad peliculas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "8.8"
+        },
+        {
+          "campo": "resolucion_maxima",
+          "tipo": "String (Varchar)",
+          "descripcion": "Máxima calidad disponible en catálogo (4K UHD, 1080p FHD, 720p HD).",
+          "restriccion": "Técnico",
+          "sensibilidad": "Pública",
+          "ejemplo": "4K"
+        },
+        {
+          "campo": "url_stream",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad peliculas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "https://storage.hyperflix.io/vod/inception/mast..."
+        },
+        {
+          "campo": "url_portada",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad peliculas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "https://images.unsplash.com/photo-1536440136628..."
+        },
+        {
+          "campo": "fecha_creacion",
+          "tipo": "Timestamp (ISO 8601)",
+          "descripcion": "Campo operacional de la entidad peliculas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "2026-09-09 13:51:46.657000"
+        }
+      ]
+    },
+    "reproducciones_analiticas": {
+      "nombre": "reproducciones_analiticas",
+      "capa": "Data Warehouse - Tabla de Hechos (OLAP)",
+      "total_documentos": 20008,
+      "total_campos": 33,
+      "indices": [
+        {
+          "nombre": "_id_",
+          "campos": [
+            "_id"
+          ],
+          "es_unico": false,
+          "tipo": "Simple"
+        },
+        {
+          "nombre": "idx_tiempo",
+          "campos": [
+            "anio",
+            "mes",
+            "dia"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        },
+        {
+          "nombre": "idx_contenido_tipo_genero",
+          "campos": [
+            "contenido.tipo",
+            "contenido.genero_o_categoria"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        },
+        {
+          "nombre": "idx_usuario_pais_plan",
+          "campos": [
+            "usuario.pais",
+            "usuario.plan"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        },
+        {
+          "nombre": "idx_disp_buffering",
+          "campos": [
+            "dispositivo.tipo",
+            "eventos_buffering"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        },
+        {
+          "nombre": "idx_abandono_genero",
+          "campos": [
+            "abandono",
+            "contenido.genero_o_categoria"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        },
+        {
+          "nombre": "idx_hora_dia",
+          "campos": [
+            "hora",
+            "dia_semana"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        },
+        {
+          "nombre": "idx_segmento_ciudad",
+          "campos": [
+            "usuario.segmento",
+            "usuario.ciudad"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        },
+        {
+          "nombre": "idx_plan_duracion",
+          "campos": [
+            "usuario.plan",
+            "duracion_vista_minutos"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        },
+        {
+          "nombre": "idx_dia_duracion",
+          "campos": [
+            "dia_semana",
+            "duracion_vista_minutos"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        },
+        {
+          "nombre": "idx_disp_abandono",
+          "campos": [
+            "dispositivo.tipo",
+            "abandono"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        },
+        {
+          "nombre": "idx_usuario_duracion",
+          "campos": [
+            "usuario.id",
+            "duracion_vista_minutos"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        },
+        {
+          "nombre": "idx_mes_anio",
+          "campos": [
+            "mes",
+            "anio"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        },
+        {
+          "nombre": "idx_completado_duracion",
+          "campos": [
+            "completado",
+            "duracion_vista_minutos"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        }
+      ],
+      "campos": [
+        {
+          "campo": "_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "restriccion": "Clave Primaria",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1abca0bc1b824f102857d"
+        },
+        {
+          "campo": "dispositivo.tipo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Tipo de pantalla receptora: SMART_TV, SMARTPHONE, LAPTOP, TABLET.",
+          "restriccion": "Dimensión",
+          "sensibilidad": "Interna",
+          "ejemplo": "Smart TV Samsung"
+        },
+        {
+          "campo": "dispositivo.sistema_operativo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Tizen"
+        },
+        {
+          "campo": "dispositivo.resolucion",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "3840x2160 (4K)"
+        },
+        {
+          "campo": "codigo_evento",
+          "tipo": "String (Varchar)",
+          "descripcion": "Identificador único del evento de streaming emitido (EVT-XXXXX).",
+          "restriccion": "Único / Indexado",
+          "sensibilidad": "Interna",
+          "ejemplo": "EVT-0001"
+        },
+        {
+          "campo": "fecha_completa",
+          "tipo": "Timestamp (ISO 8601)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "2026-09-09 10:51:47.656000"
+        },
+        {
+          "campo": "anio",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "2026"
+        },
+        {
+          "campo": "mes",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "9"
+        },
+        {
+          "campo": "dia",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "9"
+        },
+        {
+          "campo": "hora",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "10"
+        },
+        {
+          "campo": "dia_semana",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "4"
+        },
+        {
+          "campo": "usuario.id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac2d59c70dc61ee2cba"
+        },
+        {
+          "campo": "usuario.codigo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "USR-00001"
+        },
+        {
+          "campo": "usuario.nombre",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Carlos Mendoza"
+        },
+        {
+          "campo": "usuario.pais",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Colombia"
+        },
+        {
+          "campo": "usuario.ciudad",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Bogotá"
+        },
+        {
+          "campo": "usuario.segmento",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Cinéfilo Premium"
+        },
+        {
+          "campo": "usuario.plan",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Premium 4K"
+        },
+        {
+          "campo": "contenido.id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac2d59c70dc61ee2caf"
+        },
+        {
+          "campo": "contenido.tipo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Pelicula"
+        },
+        {
+          "campo": "contenido.titulo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Inception"
+        },
+        {
+          "campo": "contenido.genero_o_categoria",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Ciencia Ficción"
+        },
+        {
+          "campo": "contenido.anio",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "2010"
+        },
+        {
+          "campo": "duracion_vista_segundos",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "0"
+        },
+        {
+          "campo": "duracion_vista_minutos",
+          "tipo": "Double / Float",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "0.0"
+        },
+        {
+          "campo": "porcentaje_visto",
+          "tipo": "Double / Float",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "0.0"
+        },
+        {
+          "campo": "tipo_evento",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "PLAY"
+        },
+        {
+          "campo": "bitrate_kbps",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "15000"
+        },
+        {
+          "campo": "latencia_ms",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "42"
+        },
+        {
+          "campo": "contenido.duracion_total_seg",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "4171"
+        },
+        {
+          "campo": "completado",
+          "tipo": "Boolean",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "True"
+        },
+        {
+          "campo": "abandono",
+          "tipo": "Boolean",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "False"
+        },
+        {
+          "campo": "eventos_buffering",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad reproducciones_analiticas.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "0"
+        }
+      ]
+    },
+    "suscripciones": {
+      "nombre": "suscripciones",
+      "capa": "Transaccional / Ingesta (OLTP)",
+      "total_documentos": 1506,
+      "total_campos": 10,
+      "indices": [
+        {
+          "nombre": "_id_",
+          "campos": [
+            "_id"
+          ],
+          "es_unico": false,
+          "tipo": "Simple"
+        },
+        {
+          "nombre": "idx_sub_usuario",
+          "campos": [
+            "usuario_id"
+          ],
+          "es_unico": false,
+          "tipo": "Simple"
+        },
+        {
+          "nombre": "idx_sub_estado_plan",
+          "campos": [
+            "estado",
+            "plan"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        }
+      ],
+      "campos": [
+        {
+          "campo": "_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "restriccion": "Clave Primaria",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac3d59c70dc61ee2cbd"
+        },
+        {
+          "campo": "codigo_suscripcion",
+          "tipo": "String (Varchar)",
+          "descripcion": "Identificador único del contrato de suscripción (SUB-XXXXX).",
+          "restriccion": "Único",
+          "sensibilidad": "Interna",
+          "ejemplo": "SUB-00001"
+        },
+        {
+          "campo": "usuario_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Referencia al suscriptor titular de la cuenta.",
+          "restriccion": "Clave Foránea",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac2d59c70dc61ee2cba"
+        },
+        {
+          "campo": "plan",
+          "tipo": "String (Varchar)",
+          "descripcion": "Modalidad de suscripción contratada: BASICO (720p), ESTANDAR (1080p), PREMIUM (4K UHD).",
+          "restriccion": "Indexado",
+          "sensibilidad": "Pública",
+          "ejemplo": "Premium 4K"
+        },
+        {
+          "campo": "estado",
+          "tipo": "String (Varchar)",
+          "descripcion": "Estado de la membresía: ACTIVA, CANCELADA, EN_MORA, PAUSADA.",
+          "restriccion": "Indexado",
+          "sensibilidad": "Interna",
+          "ejemplo": "Activa"
+        },
+        {
+          "campo": "precio_mensual",
+          "tipo": "Integer (Int32 / Int64)",
+          "descripcion": "Campo operacional de la entidad suscripciones.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "45000"
+        },
+        {
+          "campo": "moneda",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad suscripciones.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "COP"
+        },
+        {
+          "campo": "fecha_inicio",
+          "tipo": "Timestamp (ISO 8601)",
+          "descripcion": "Fecha de activación del ciclo de facturación.",
+          "restriccion": "Requerido",
+          "sensibilidad": "Interna",
+          "ejemplo": "2026-08-10 13:51:47.050000"
+        },
+        {
+          "campo": "fecha_fin",
+          "tipo": "Timestamp (ISO 8601)",
+          "descripcion": "Campo operacional de la entidad suscripciones.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "2027-08-10 13:51:47.050000"
+        },
+        {
+          "campo": "renovacion_automatica",
+          "tipo": "Boolean",
+          "descripcion": "Campo operacional de la entidad suscripciones.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "True"
+        }
+      ]
+    },
+    "usuarios": {
+      "nombre": "usuarios",
+      "capa": "Transaccional / Ingesta (OLTP)",
+      "total_documentos": 1503,
+      "total_campos": 11,
+      "indices": [
+        {
+          "nombre": "_id_",
+          "campos": [
+            "_id"
+          ],
+          "es_unico": false,
+          "tipo": "Simple"
+        },
+        {
+          "nombre": "idx_usuario_correo",
+          "campos": [
+            "correo"
+          ],
+          "es_unico": true,
+          "tipo": "Único"
+        },
+        {
+          "nombre": "idx_codigo_usuario",
+          "campos": [
+            "codigo_usuario"
+          ],
+          "es_unico": true,
+          "tipo": "Único"
+        },
+        {
+          "nombre": "idx_pais_segmento",
+          "campos": [
+            "pais",
+            "segmento"
+          ],
+          "es_unico": false,
+          "tipo": "Compuesto"
+        }
+      ],
+      "campos": [
+        {
+          "campo": "_id",
+          "tipo": "ObjectId (BSON Key)",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "restriccion": "Clave Primaria",
+          "sensibilidad": "Interna",
+          "ejemplo": "6aa1aac2d59c70dc61ee2cba"
+        },
+        {
+          "campo": "codigo_usuario",
+          "tipo": "String (Varchar)",
+          "descripcion": "Código único de negocio asignado al suscriptor (USR-XXXXX).",
+          "restriccion": "Único / Indexado",
+          "sensibilidad": "Interna",
+          "ejemplo": "USR-00001"
+        },
+        {
+          "campo": "nombre",
+          "tipo": "String (Varchar)",
+          "descripcion": "Nombre completo o alias del suscriptor de la plataforma.",
+          "restriccion": "Requerido",
+          "sensibilidad": "Confidencial (PII)",
+          "ejemplo": "Carlos Mendoza"
+        },
+        {
+          "campo": "correo",
+          "tipo": "String (Varchar)",
+          "descripcion": "Dirección de correo electrónico principal para inicio de sesión y facturación.",
+          "restriccion": "Único / Indexado",
+          "sensibilidad": "Confidencial (PII)",
+          "ejemplo": "carlos.mendoza@hyperflix.io"
+        },
+        {
+          "campo": "contraseña_hash",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad usuarios.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "sha256$e3b0c44298fc1c149afbf4c8996fb92427ae41e4..."
+        },
+        {
+          "campo": "pais",
+          "tipo": "String (Varchar)",
+          "descripcion": "País de residencia del usuario para segmentación geográfica de catálogo.",
+          "restriccion": "Indexado",
+          "sensibilidad": "Interna",
+          "ejemplo": "Colombia"
+        },
+        {
+          "campo": "ciudad",
+          "tipo": "String (Varchar)",
+          "descripcion": "Ciudad o municipio de residencia del suscriptor.",
+          "restriccion": "Opcional",
+          "sensibilidad": "Interna",
+          "ejemplo": "Bogotá"
+        },
+        {
+          "campo": "segmento",
+          "tipo": "String (Varchar)",
+          "descripcion": "Segmentación comercial del usuario: VIP, ESTUDIANTE, FREEMIUM, REGULAR.",
+          "restriccion": "Indexado",
+          "sensibilidad": "Interna",
+          "ejemplo": "Cinéfilo Premium"
+        },
+        {
+          "campo": "dispositivo_frecuente",
+          "tipo": "String (Varchar)",
+          "descripcion": "Campo operacional de la entidad usuarios.",
+          "restriccion": "General",
+          "sensibilidad": "Interna",
+          "ejemplo": "Smart TV Samsung"
+        },
+        {
+          "campo": "fecha_registro",
+          "tipo": "Timestamp (ISO 8601)",
+          "descripcion": "Fecha y hora exacta en la que el usuario creó su cuenta.",
+          "restriccion": "Requerido",
+          "sensibilidad": "Interna",
+          "ejemplo": "2026-05-12 13:51:46.858000"
+        },
+        {
+          "campo": "activo",
+          "tipo": "Boolean",
+          "descripcion": "Flag booleano que indica si la señal se encuentra al aire.",
+          "restriccion": "Booleano",
+          "sensibilidad": "Interna",
+          "ejemplo": "True"
+        }
+      ]
+    }
+  },
+  "data_lake_parquet": {
+    "raw/canales_tv.parquet": {
+      "archivo": "canales_tv.parquet",
+      "zona": "RAW",
+      "tamano_kb": 8.86,
+      "num_filas": 13,
+      "compresion": "Snappy",
+      "formato": "Apache Parquet (Columnar)",
+      "num_columnas": 11,
+      "columnas": [
+        {
+          "columna": "_id",
+          "tipo_arrow": "large_string",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "codigo_canal",
+          "tipo_arrow": "large_string",
+          "descripcion": "Identificador único del canal de televisión en vivo (IPTV-XXX).",
+          "sensibilidad": "Pública"
+        },
+        {
+          "columna": "nombre",
+          "tipo_arrow": "large_string",
+          "descripcion": "Nombre completo o alias del suscriptor de la plataforma.",
+          "sensibilidad": "Confidencial (PII)"
+        },
+        {
+          "columna": "categoria",
+          "tipo_arrow": "large_string",
+          "descripcion": "Categoría temática de la señal: Noticias, Deportes, Cultura, Música, General.",
+          "sensibilidad": "Pública"
+        },
+        {
+          "columna": "pais",
+          "tipo_arrow": "large_string",
+          "descripcion": "País de residencia del usuario para segmentación geográfica de catálogo.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "idioma",
+          "tipo_arrow": "large_string",
+          "descripcion": "Idioma principal de la transmisión en vivo.",
+          "sensibilidad": "Pública"
+        },
+        {
+          "columna": "url_stream",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "stream_hls_directo",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "logo_url",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "activo",
+          "tipo_arrow": "bool",
+          "descripcion": "Flag booleano que indica si la señal se encuentra al aire.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "tipo",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        }
+      ]
+    },
+    "raw/eventos_reproduccion.parquet": {
+      "archivo": "eventos_reproduccion.parquet",
+      "zona": "RAW",
+      "tamano_kb": 666.76,
+      "num_filas": 20008,
+      "compresion": "Snappy",
+      "formato": "Apache Parquet (Columnar)",
+      "num_columnas": 18,
+      "columnas": [
+        {
+          "columna": "_id",
+          "tipo_arrow": "large_string",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "codigo_evento",
+          "tipo_arrow": "large_string",
+          "descripcion": "Identificador único del evento de streaming emitido (EVT-XXXXX).",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "usuario_id",
+          "tipo_arrow": "large_string",
+          "descripcion": "Referencia al suscriptor titular de la cuenta.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "contenido_id",
+          "tipo_arrow": "large_string",
+          "descripcion": "Identificador del contenido audiovisual sintonizado.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "tipo_contenido",
+          "tipo_arrow": "large_string",
+          "descripcion": "Tipo de transmisión: PELICULA_VOD o CANAL_TV_IPTV.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "tipo_evento",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "dispositivo",
+          "tipo_arrow": "large_string",
+          "descripcion": "Subdocumento con metadatos del reproductor: tipo, SO, navegador, app_version.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "sistema_operativo",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "timestamp",
+          "tipo_arrow": "timestamp[us]",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "segundo_reproduccion",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "duracion_sesion_segundos",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "bitrate_kbps",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "latencia_ms",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "resolucion",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "duracion_total_contenido_segundos",
+          "tipo_arrow": "double",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "completado",
+          "tipo_arrow": "bool",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "abandono",
+          "tipo_arrow": "bool",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "eventos_buffering",
+          "tipo_arrow": "double",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        }
+      ]
+    },
+    "raw/peliculas.parquet": {
+      "archivo": "peliculas.parquet",
+      "zona": "RAW",
+      "tamano_kb": 12.49,
+      "num_filas": 66,
+      "compresion": "Snappy",
+      "formato": "Apache Parquet (Columnar)",
+      "num_columnas": 13,
+      "columnas": [
+        {
+          "columna": "_id",
+          "tipo_arrow": "large_string",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "codigo_pelicula",
+          "tipo_arrow": "large_string",
+          "descripcion": "Código único del título audiovisual en el catálogo VOD (MOV-XXXXX).",
+          "sensibilidad": "Pública"
+        },
+        {
+          "columna": "titulo",
+          "tipo_arrow": "large_string",
+          "descripcion": "Nombre comercial de la película o contenido bajo demanda.",
+          "sensibilidad": "Pública"
+        },
+        {
+          "columna": "genero",
+          "tipo_arrow": "large_string",
+          "descripcion": "Género cinematográfico principal (Acción, Ciencia Ficción, Drama, Terror, etc.).",
+          "sensibilidad": "Pública"
+        },
+        {
+          "columna": "duracion_minutos",
+          "tipo_arrow": "int64",
+          "descripcion": "Extensión total de la película expresada en minutos.",
+          "sensibilidad": "Pública"
+        },
+        {
+          "columna": "anio",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "clasificacion",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "director",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "rating_promedio",
+          "tipo_arrow": "double",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "resolucion_maxima",
+          "tipo_arrow": "large_string",
+          "descripcion": "Máxima calidad disponible en catálogo (4K UHD, 1080p FHD, 720p HD).",
+          "sensibilidad": "Pública"
+        },
+        {
+          "columna": "url_stream",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "url_portada",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "fecha_creacion",
+          "tipo_arrow": "timestamp[us]",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        }
+      ]
+    },
+    "raw/usuarios.parquet": {
+      "archivo": "usuarios.parquet",
+      "zona": "RAW",
+      "tamano_kb": 185.66,
+      "num_filas": 1503,
+      "compresion": "Snappy",
+      "formato": "Apache Parquet (Columnar)",
+      "num_columnas": 11,
+      "columnas": [
+        {
+          "columna": "_id",
+          "tipo_arrow": "large_string",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "codigo_usuario",
+          "tipo_arrow": "large_string",
+          "descripcion": "Código único de negocio asignado al suscriptor (USR-XXXXX).",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "nombre",
+          "tipo_arrow": "large_string",
+          "descripcion": "Nombre completo o alias del suscriptor de la plataforma.",
+          "sensibilidad": "Confidencial (PII)"
+        },
+        {
+          "columna": "correo",
+          "tipo_arrow": "large_string",
+          "descripcion": "Dirección de correo electrónico principal para inicio de sesión y facturación.",
+          "sensibilidad": "Confidencial (PII)"
+        },
+        {
+          "columna": "contraseña_hash",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "pais",
+          "tipo_arrow": "large_string",
+          "descripcion": "País de residencia del usuario para segmentación geográfica de catálogo.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "ciudad",
+          "tipo_arrow": "large_string",
+          "descripcion": "Ciudad o municipio de residencia del suscriptor.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "segmento",
+          "tipo_arrow": "large_string",
+          "descripcion": "Segmentación comercial del usuario: VIP, ESTUDIANTE, FREEMIUM, REGULAR.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "dispositivo_frecuente",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona RAW.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "fecha_registro",
+          "tipo_arrow": "timestamp[us]",
+          "descripcion": "Fecha y hora exacta en la que el usuario creó su cuenta.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "activo",
+          "tipo_arrow": "bool",
+          "descripcion": "Flag booleano que indica si la señal se encuentra al aire.",
+          "sensibilidad": "Interna"
+        }
+      ]
+    },
+    "processed/reproducciones_procesadas.parquet": {
+      "archivo": "reproducciones_procesadas.parquet",
+      "zona": "PROCESSED",
+      "tamano_kb": 675.27,
+      "num_filas": 20004,
+      "compresion": "Snappy",
+      "formato": "Apache Parquet (Columnar)",
+      "num_columnas": 24,
+      "columnas": [
+        {
+          "columna": "_id",
+          "tipo_arrow": "large_string",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "codigo_evento",
+          "tipo_arrow": "large_string",
+          "descripcion": "Identificador único del evento de streaming emitido (EVT-XXXXX).",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "usuario_id",
+          "tipo_arrow": "large_string",
+          "descripcion": "Referencia al suscriptor titular de la cuenta.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "contenido_id",
+          "tipo_arrow": "large_string",
+          "descripcion": "Identificador del contenido audiovisual sintonizado.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "tipo_contenido",
+          "tipo_arrow": "large_string",
+          "descripcion": "Tipo de transmisión: PELICULA_VOD o CANAL_TV_IPTV.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "tipo_evento",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "dispositivo",
+          "tipo_arrow": "large_string",
+          "descripcion": "Subdocumento con metadatos del reproductor: tipo, SO, navegador, app_version.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "sistema_operativo",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "timestamp",
+          "tipo_arrow": "timestamp[us]",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "segundo_reproduccion",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "duracion_sesion_segundos",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "bitrate_kbps",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "latencia_ms",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "resolucion",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "duracion_total_contenido_segundos",
+          "tipo_arrow": "double",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "completado",
+          "tipo_arrow": "bool",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "abandono",
+          "tipo_arrow": "bool",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "eventos_buffering",
+          "tipo_arrow": "double",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "anio",
+          "tipo_arrow": "int32",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "mes",
+          "tipo_arrow": "int32",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "dia",
+          "tipo_arrow": "int32",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "hora",
+          "tipo_arrow": "int32",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "fecha_procesamiento",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "categoria_latencia",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona PROCESSED.",
+          "sensibilidad": "Interna"
+        }
+      ]
+    },
+    "curated/kpis_spark_kpis_spark_peliculas.parquet": {
+      "archivo": "kpis_spark_kpis_spark_peliculas.parquet",
+      "zona": "CURATED",
+      "tamano_kb": 1.95,
+      "num_filas": 14,
+      "compresion": "Snappy",
+      "formato": "Apache Parquet (Columnar)",
+      "num_columnas": 2,
+      "columnas": [
+        {
+          "columna": "tag_individual",
+          "tipo_arrow": "string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "total_registros",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        }
+      ]
+    },
+    "curated/kpis_spark_peliculas.parquet": {
+      "archivo": "kpis_spark_peliculas.parquet",
+      "zona": "CURATED",
+      "tamano_kb": 4.02,
+      "num_filas": 10,
+      "compresion": "Snappy",
+      "formato": "Apache Parquet (Columnar)",
+      "num_columnas": 5,
+      "columnas": [
+        {
+          "columna": "genero_individual",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "total_titulos",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "rating_promedio_kpi",
+          "tipo_arrow": "double",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "duracion_promedio_min",
+          "tipo_arrow": "double",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "minutos_totales",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        }
+      ]
+    },
+    "curated/kpis_spark_reproducciones_curadas.parquet": {
+      "archivo": "kpis_spark_reproducciones_curadas.parquet",
+      "zona": "CURATED",
+      "tamano_kb": 274.16,
+      "num_filas": 40016,
+      "compresion": "Snappy",
+      "formato": "Apache Parquet (Columnar)",
+      "num_columnas": 2,
+      "columnas": [
+        {
+          "columna": "tag_individual",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "total_registros",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        }
+      ]
+    },
+    "curated/reproducciones_curadas.parquet": {
+      "archivo": "reproducciones_curadas.parquet",
+      "zona": "CURATED",
+      "tamano_kb": 833.49,
+      "num_filas": 20008,
+      "compresion": "Snappy",
+      "formato": "Apache Parquet (Columnar)",
+      "num_columnas": 34,
+      "columnas": [
+        {
+          "columna": "_id",
+          "tipo_arrow": "large_string",
+          "descripcion": "Identificador único autogenerado del documento BSON.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "codigo_evento",
+          "tipo_arrow": "large_string",
+          "descripcion": "Identificador único del evento de streaming emitido (EVT-XXXXX).",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "fecha_completa",
+          "tipo_arrow": "timestamp[us]",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "anio",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "mes",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "dia",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "hora",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "dia_semana",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "duracion_vista_segundos",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "duracion_vista_minutos",
+          "tipo_arrow": "double",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "porcentaje_visto",
+          "tipo_arrow": "double",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "tipo_evento",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "bitrate_kbps",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "latencia_ms",
+          "tipo_arrow": "int64",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "dispositivo.tipo",
+          "tipo_arrow": "large_string",
+          "descripcion": "Tipo de pantalla receptora: SMART_TV, SMARTPHONE, LAPTOP, TABLET.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "dispositivo.sistema_operativo",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "dispositivo.resolucion",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "usuario.id",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "usuario.codigo",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "usuario.nombre",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "usuario.pais",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "usuario.ciudad",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "usuario.segmento",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "usuario.plan",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "contenido.id",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "contenido.tipo",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "contenido.titulo",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "contenido.genero_o_categoria",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "contenido.anio",
+          "tipo_arrow": "double",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "completado",
+          "tipo_arrow": "bool",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "abandono",
+          "tipo_arrow": "bool",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "eventos_buffering",
+          "tipo_arrow": "double",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "contenido.duracion_total_seg",
+          "tipo_arrow": "double",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        },
+        {
+          "columna": "procesado_por",
+          "tipo_arrow": "large_string",
+          "descripcion": "Atributo columnar en zona CURATED.",
+          "sensibilidad": "Interna"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HYPERFLIX — Catálogo y Diccionario de Datos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen">
+  <!-- Encabezado -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">🎬</span>
+        <div>
+          <h1 class="text-xl font-black tracking-wider text-rose-500">HYPERFLIX</h1>
+          <p class="text-xs text-slate-400">Portal de Gobernanza y Diccionario de Datos (ITP 2026-1)</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 text-xs">
+        <span class="px-3 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+          ● Estado: Catálogo en Vivo
+        </span>
+        <span class="text-slate-400">Actualizado: 2026-09-22 20:00</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-8">
+    <!-- Tarjetas de Resumen -->
+    <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+      <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
+        <p class="text-xs text-slate-400 uppercase font-semibold">Colecciones Atlas</p>
+        <p class="text-3xl font-extrabold text-white mt-1">12</p>
+        <p class="text-xs text-slate-500 mt-2">OLTP + OLAP + Estrella</p>
+      </div>
+      <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
+        <p class="text-xs text-slate-400 uppercase font-semibold">Total Documentos</p>
+        <p class="text-3xl font-extrabold text-rose-400 mt-1">65,265</p>
+        <p class="text-xs text-slate-500 mt-2">Registros inspeccionados</p>
+      </div>
+      <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
+        <p class="text-xs text-slate-400 uppercase font-semibold">Archivos Data Lake</p>
+        <p class="text-3xl font-extrabold text-sky-400 mt-1">9</p>
+        <p class="text-xs text-slate-500 mt-2">Parquet Snappy</p>
+      </div>
+      <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
+        <p class="text-xs text-slate-400 uppercase font-semibold">Gobernanza / PII</p>
+        <p class="text-3xl font-extrabold text-emerald-400 mt-1">100%</p>
+        <p class="text-xs text-slate-500 mt-2">Sensibilidad mapeada</p>
+      </div>
+    </section>
+
+    <!-- Pestañas de Navegación -->
+    <div class="mb-6 flex gap-3 border-b border-slate-800 pb-3">
+      <button class="px-4 py-2 rounded-lg bg-rose-600 text-white font-medium text-sm">Colecciones MongoDB Atlas</button>
+      <button class="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 font-medium text-sm">Zonas Data Lake Parquet</button>
+    </div>
+
+    <!-- Lista de Colecciones -->
+    <div class="space-y-8">
+
+      <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl">
+        <div class="p-6 bg-slate-850 border-b border-slate-800 flex flex-col md:flex-row justify-between md:items-center gap-2">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg">📦</span>
+              <h2 class="text-xl font-bold text-white tracking-wide">coleccion: <span class="text-rose-400">canales_tv</span></h2>
+              <span class="px-2.5 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300 border border-slate-700">Transaccional / Ingesta (OLTP)</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Registros: <strong class="text-white">13</strong> | Total atributos: <strong class="text-white">11</strong></p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-950/60 text-xs uppercase text-slate-400 border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Campo</th>
+                <th class="py-3 px-4">Tipo de Dato</th>
+                <th class="py-3 px-4">Restricción</th>
+                <th class="py-3 px-4">Sensibilidad</th>
+                <th class="py-3 px-4">Descripción de Negocio</th>
+                <th class="py-3 px-4">Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60">
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Primaria</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único autogenerado del documento BSON.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac2d59c70dc61ee2cb5</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">codigo_canal</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Único / Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Pública</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único del canal de televisión en vivo (IPTV-XXX).</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">IPTV-001</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">nombre</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Requerido</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-rose-500/10 text-rose-400 border-rose-500/30">Confidencial (PII)</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Nombre completo o alias del suscriptor de la plataforma.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">France 24 Español</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">categoria</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Pública</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Categoría temática de la señal: Noticias, Deportes, Cultura, Música, General.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Noticias</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">pais</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">País de residencia del usuario para segmentación geográfica de catálogo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Francia / Internacional</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">idioma</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Informativo</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Pública</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Idioma principal de la transmisión en vivo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Español</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">url_stream</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad canales_tv.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">https://raw.githubusercontent.com/iptv-org/iptv...</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">stream_hls_directo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad canales_tv.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">https://f24hls-i.akamaihd.net/hls/live/221193/F...</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">logo_url</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad canales_tv.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">https://upload.wikimedia.org/wikipedia/commons/...</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">activo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Boolean</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Booleano</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Flag booleano que indica si la señal se encuentra al aire.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">True</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">tipo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad canales_tv.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">IPTV Público Libre</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl">
+        <div class="p-6 bg-slate-850 border-b border-slate-800 flex flex-col md:flex-row justify-between md:items-center gap-2">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg">📦</span>
+              <h2 class="text-xl font-bold text-white tracking-wide">coleccion: <span class="text-rose-400">dim_contenido</span></h2>
+              <span class="px-2.5 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300 border border-slate-700">Data Warehouse - Dimensión (OLAP)</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Registros: <strong class="text-white">79</strong> | Total atributos: <strong class="text-white">10</strong></p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-950/60 text-xs uppercase text-slate-400 border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Campo</th>
+                <th class="py-3 px-4">Tipo de Dato</th>
+                <th class="py-3 px-4">Restricción</th>
+                <th class="py-3 px-4">Sensibilidad</th>
+                <th class="py-3 px-4">Descripción de Negocio</th>
+                <th class="py-3 px-4">Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60">
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Primaria</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único autogenerado del documento BSON.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1ab165037070afee35a2c</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">titulo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Requerido</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Pública</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Nombre comercial de la película o contenido bajo demanda.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">El Laberinto Eterno</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">tipo_contenido</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Tipo de transmisión: PELICULA_VOD o CANAL_TV_IPTV.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Pelicula</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">genero_o_categoria</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_contenido.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Comedia</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">anio_estreno</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_contenido.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2015</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">total_reproducciones</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_contenido.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">250</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">contenido_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Foránea</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador del contenido audiovisual sintonizado.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1ab165037070afee35a2c</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">minutos_totales</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Double / Float</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_contenido.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">24214.7</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">porcentaje_completitud_promedio</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Double / Float</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_contenido.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">60.9</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">bitrate_promedio_kbps</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Double / Float</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_contenido.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">9745.0</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl">
+        <div class="p-6 bg-slate-850 border-b border-slate-800 flex flex-col md:flex-row justify-between md:items-center gap-2">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg">📦</span>
+              <h2 class="text-xl font-bold text-white tracking-wide">coleccion: <span class="text-rose-400">dim_dispositivo</span></h2>
+              <span class="px-2.5 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300 border border-slate-700">Data Warehouse - Dimensión (OLAP)</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Registros: <strong class="text-white">9</strong> | Total atributos: <strong class="text-white">7</strong></p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-950/60 text-xs uppercase text-slate-400 border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Campo</th>
+                <th class="py-3 px-4">Tipo de Dato</th>
+                <th class="py-3 px-4">Restricción</th>
+                <th class="py-3 px-4">Sensibilidad</th>
+                <th class="py-3 px-4">Descripción de Negocio</th>
+                <th class="py-3 px-4">Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60">
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Primaria</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único autogenerado del documento BSON.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">PC Web Safari</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">sistema_operativo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_dispositivo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">macOS Sonoma</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">resolucion_max</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_dispositivo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2560x1440 (2K)</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">total_sesiones</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Métrica Acumulada</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Conteo agregado de sesiones de streaming en la ventana temporal.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2881</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">tipo_dispositivo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_dispositivo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">PC Web Safari</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">latencia_promedio_ms</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Double / Float</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_dispositivo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">65.9</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">bitrate_promedio_kbps</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Double / Float</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_dispositivo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">9916.0</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl">
+        <div class="p-6 bg-slate-850 border-b border-slate-800 flex flex-col md:flex-row justify-between md:items-center gap-2">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg">📦</span>
+              <h2 class="text-xl font-bold text-white tracking-wide">coleccion: <span class="text-rose-400">dim_tiempo</span></h2>
+              <span class="px-2.5 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300 border border-slate-700">Data Warehouse - Dimensión (OLAP)</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Registros: <strong class="text-white">425</strong> | Total atributos: <strong class="text-white">10</strong></p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-950/60 text-xs uppercase text-slate-400 border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Campo</th>
+                <th class="py-3 px-4">Tipo de Dato</th>
+                <th class="py-3 px-4">Restricción</th>
+                <th class="py-3 px-4">Sensibilidad</th>
+                <th class="py-3 px-4">Descripción de Negocio</th>
+                <th class="py-3 px-4">Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60">
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Timestamp (ISO 8601)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Primaria</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único autogenerado del documento BSON.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2026-09-09 13:48:32</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">fecha</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Timestamp (ISO 8601)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_tiempo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2026-09-09 13:48:32</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">anio</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_tiempo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2026</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">mes</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_tiempo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">9</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">dia</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_tiempo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">9</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">hora</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_tiempo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">13</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">dia_semana</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_tiempo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">4</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">trimestre</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Double / Float</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Atributo Dimensión</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Trimestre del año (Q1, Q2, Q3, Q4) calculado con $ceil y $divide.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">3.0</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">es_fin_de_semana</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_tiempo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">No</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">es_hora_pico</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_tiempo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">No</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl">
+        <div class="p-6 bg-slate-850 border-b border-slate-800 flex flex-col md:flex-row justify-between md:items-center gap-2">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg">📦</span>
+              <h2 class="text-xl font-bold text-white tracking-wide">coleccion: <span class="text-rose-400">dim_usuario</span></h2>
+              <span class="px-2.5 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300 border border-slate-700">Data Warehouse - Dimensión (OLAP)</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Registros: <strong class="text-white">1,503</strong> | Total atributos: <strong class="text-white">12</strong></p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-950/60 text-xs uppercase text-slate-400 border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Campo</th>
+                <th class="py-3 px-4">Tipo de Dato</th>
+                <th class="py-3 px-4">Restricción</th>
+                <th class="py-3 px-4">Sensibilidad</th>
+                <th class="py-3 px-4">Descripción de Negocio</th>
+                <th class="py-3 px-4">Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60">
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Primaria</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único autogenerado del documento BSON.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1ab175037070afee35c73</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">codigo_usuario</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Único / Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Código único de negocio asignado al suscriptor (USR-XXXXX).</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">USR-10571</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">nombre</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Requerido</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-rose-500/10 text-rose-400 border-rose-500/30">Confidencial (PII)</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Nombre completo o alias del suscriptor de la plataforma.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Dorotea Armengol Sebastián</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">pais</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">País de residencia del usuario para segmentación geográfica de catálogo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Colombia</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">ciudad</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Opcional</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Ciudad o municipio de residencia del suscriptor.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Bogotá</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">plan_suscripcion</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_usuario.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Estándar HD</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">segmento</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Segmentación comercial del usuario: VIP, ESTUDIANTE, FREEMIUM, REGULAR.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Fin de Semana</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">total_sesiones</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Métrica Acumulada</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Conteo agregado de sesiones de streaming en la ventana temporal.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">13</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">usuario_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Foránea</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Referencia al suscriptor titular de la cuenta.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1ab175037070afee35c73</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">total_minutos_vistos</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Double / Float</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_usuario.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">977.0</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">promedio_minutos_sesion</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Double / Float</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_usuario.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">75.2</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">latencia_promedio_ms</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Double / Float</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad dim_usuario.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">87.5</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl">
+        <div class="p-6 bg-slate-850 border-b border-slate-800 flex flex-col md:flex-row justify-between md:items-center gap-2">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg">📦</span>
+              <h2 class="text-xl font-bold text-white tracking-wide">coleccion: <span class="text-rose-400">eventos_reproduccion</span></h2>
+              <span class="px-2.5 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300 border border-slate-700">Transaccional / Ingesta (OLTP)</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Registros: <strong class="text-white">20,008</strong> | Total atributos: <strong class="text-white">18</strong></p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-950/60 text-xs uppercase text-slate-400 border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Campo</th>
+                <th class="py-3 px-4">Tipo de Dato</th>
+                <th class="py-3 px-4">Restricción</th>
+                <th class="py-3 px-4">Sensibilidad</th>
+                <th class="py-3 px-4">Descripción de Negocio</th>
+                <th class="py-3 px-4">Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60">
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Primaria</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único autogenerado del documento BSON.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac3d59c70dc61ee2cc3</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">codigo_evento</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Único / Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único del evento de streaming emitido (EVT-XXXXX).</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">EVT-0001</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">usuario_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Foránea</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Referencia al suscriptor titular de la cuenta.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac2d59c70dc61ee2cba</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">contenido_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Foránea</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador del contenido audiovisual sintonizado.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac2d59c70dc61ee2caf</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">tipo_contenido</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Tipo de transmisión: PELICULA_VOD o CANAL_TV_IPTV.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Pelicula</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">tipo_evento</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad eventos_reproduccion.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">PLAY</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">dispositivo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Objeto</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Subdocumento con metadatos del reproductor: tipo, SO, navegador, app_version.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Smart TV Samsung</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">sistema_operativo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad eventos_reproduccion.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Tizen</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">timestamp</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Timestamp (ISO 8601)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad eventos_reproduccion.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2026-09-09 10:51:47.656000</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">segundo_reproduccion</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad eventos_reproduccion.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">0</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">duracion_sesion_segundos</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad eventos_reproduccion.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">0</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">bitrate_kbps</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad eventos_reproduccion.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">15000</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">latencia_ms</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad eventos_reproduccion.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">42</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">resolucion</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad eventos_reproduccion.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">3840x2160 (4K)</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">duracion_total_contenido_segundos</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad eventos_reproduccion.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">4171</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">completado</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Boolean</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad eventos_reproduccion.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">True</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">abandono</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Boolean</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad eventos_reproduccion.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">False</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">eventos_buffering</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad eventos_reproduccion.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">0</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl">
+        <div class="p-6 bg-slate-850 border-b border-slate-800 flex flex-col md:flex-row justify-between md:items-center gap-2">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg">📦</span>
+              <h2 class="text-xl font-bold text-white tracking-wide">coleccion: <span class="text-rose-400">fact_reproducciones</span></h2>
+              <span class="px-2.5 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300 border border-slate-700">Data Warehouse - Tabla de Hechos (OLAP)</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Registros: <strong class="text-white">20,008</strong> | Total atributos: <strong class="text-white">12</strong></p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-950/60 text-xs uppercase text-slate-400 border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Campo</th>
+                <th class="py-3 px-4">Tipo de Dato</th>
+                <th class="py-3 px-4">Restricción</th>
+                <th class="py-3 px-4">Sensibilidad</th>
+                <th class="py-3 px-4">Descripción de Negocio</th>
+                <th class="py-3 px-4">Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60">
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Primaria</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único autogenerado del documento BSON.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1abca0bc1b824f102857d</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">codigo_evento</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Único / Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único del evento de streaming emitido (EVT-XXXXX).</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">EVT-0001</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">fecha_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Timestamp (ISO 8601)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Primaria Dimensión</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Clave subrogada de fecha en formato YYYYMMDD.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2026-09-09 10:51:47.656000</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">usuario_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Foránea</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Referencia al suscriptor titular de la cuenta.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac2d59c70dc61ee2cba</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">contenido_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Foránea</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador del contenido audiovisual sintonizado.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac2d59c70dc61ee2caf</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">dispositivo_tipo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad fact_reproducciones.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Smart TV Samsung</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">tipo_evento</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad fact_reproducciones.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">PLAY</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">duracion_segundos</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Técnico</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Duración total de la película calculada en segundos para telemetría.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">0</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">duracion_minutos</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Double / Float</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Requerido</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Pública</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Extensión total de la película expresada en minutos.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">0.0</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">porcentaje_visto</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Double / Float</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad fact_reproducciones.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">0.0</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">bitrate_kbps</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad fact_reproducciones.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">15000</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">latencia_ms</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad fact_reproducciones.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">42</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl">
+        <div class="p-6 bg-slate-850 border-b border-slate-800 flex flex-col md:flex-row justify-between md:items-center gap-2">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg">📦</span>
+              <h2 class="text-xl font-bold text-white tracking-wide">coleccion: <span class="text-rose-400">pagos</span></h2>
+              <span class="px-2.5 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300 border border-slate-700">Transaccional / Ingesta (OLTP)</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Registros: <strong class="text-white">137</strong> | Total atributos: <strong class="text-white">8</strong></p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-950/60 text-xs uppercase text-slate-400 border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Campo</th>
+                <th class="py-3 px-4">Tipo de Dato</th>
+                <th class="py-3 px-4">Restricción</th>
+                <th class="py-3 px-4">Sensibilidad</th>
+                <th class="py-3 px-4">Descripción de Negocio</th>
+                <th class="py-3 px-4">Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60">
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Primaria</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único autogenerado del documento BSON.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac3d59c70dc61ee2cc0</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">codigo_pago</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Único / Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Confidencial</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Código único de la transacción en la pasarela de pagos (PAY-XXXXX).</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">PAY-2026-0001</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">usuario_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Foránea</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Referencia al suscriptor titular de la cuenta.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac2d59c70dc61ee2cba</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">suscripcion_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Foránea</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Referencia al contrato de suscripción asociado.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac3d59c70dc61ee2cbd</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">monto</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad pagos.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">45000</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">metodo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad pagos.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Tarjeta de Crédito</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">fecha</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Timestamp (ISO 8601)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad pagos.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2026-08-10 13:51:47.050000</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">estado</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Estado de la membresía: ACTIVA, CANCELADA, EN_MORA, PAUSADA.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Completado</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl">
+        <div class="p-6 bg-slate-850 border-b border-slate-800 flex flex-col md:flex-row justify-between md:items-center gap-2">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg">📦</span>
+              <h2 class="text-xl font-bold text-white tracking-wide">coleccion: <span class="text-rose-400">peliculas</span></h2>
+              <span class="px-2.5 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300 border border-slate-700">Transaccional / Ingesta (OLTP)</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Registros: <strong class="text-white">66</strong> | Total atributos: <strong class="text-white">13</strong></p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-950/60 text-xs uppercase text-slate-400 border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Campo</th>
+                <th class="py-3 px-4">Tipo de Dato</th>
+                <th class="py-3 px-4">Restricción</th>
+                <th class="py-3 px-4">Sensibilidad</th>
+                <th class="py-3 px-4">Descripción de Negocio</th>
+                <th class="py-3 px-4">Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60">
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Primaria</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único autogenerado del documento BSON.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac2d59c70dc61ee2caf</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">codigo_pelicula</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Único / Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Pública</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Código único del título audiovisual en el catálogo VOD (MOV-XXXXX).</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">MOV-001</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">titulo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Requerido</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Pública</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Nombre comercial de la película o contenido bajo demanda.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Inception</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">genero</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Pública</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Género cinematográfico principal (Acción, Ciencia Ficción, Drama, Terror, etc.).</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Ciencia Ficción</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">duracion_minutos</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Requerido</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Pública</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Extensión total de la película expresada en minutos.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">148</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">anio</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad peliculas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2010</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">clasificacion</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad peliculas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">PG-13</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">director</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad peliculas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Christopher Nolan</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">rating_promedio</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Double / Float</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad peliculas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">8.8</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">resolucion_maxima</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Técnico</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Pública</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Máxima calidad disponible en catálogo (4K UHD, 1080p FHD, 720p HD).</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">4K</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">url_stream</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad peliculas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">https://storage.hyperflix.io/vod/inception/mast...</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">url_portada</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad peliculas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">https://images.unsplash.com/photo-1536440136628...</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">fecha_creacion</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Timestamp (ISO 8601)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad peliculas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2026-09-09 13:51:46.657000</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl">
+        <div class="p-6 bg-slate-850 border-b border-slate-800 flex flex-col md:flex-row justify-between md:items-center gap-2">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg">📦</span>
+              <h2 class="text-xl font-bold text-white tracking-wide">coleccion: <span class="text-rose-400">reproducciones_analiticas</span></h2>
+              <span class="px-2.5 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300 border border-slate-700">Data Warehouse - Tabla de Hechos (OLAP)</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Registros: <strong class="text-white">20,008</strong> | Total atributos: <strong class="text-white">33</strong></p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-950/60 text-xs uppercase text-slate-400 border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Campo</th>
+                <th class="py-3 px-4">Tipo de Dato</th>
+                <th class="py-3 px-4">Restricción</th>
+                <th class="py-3 px-4">Sensibilidad</th>
+                <th class="py-3 px-4">Descripción de Negocio</th>
+                <th class="py-3 px-4">Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60">
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Primaria</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único autogenerado del documento BSON.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1abca0bc1b824f102857d</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">dispositivo.tipo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Dimensión</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Tipo de pantalla receptora: SMART_TV, SMARTPHONE, LAPTOP, TABLET.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Smart TV Samsung</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">dispositivo.sistema_operativo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Tizen</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">dispositivo.resolucion</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">3840x2160 (4K)</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">codigo_evento</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Único / Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único del evento de streaming emitido (EVT-XXXXX).</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">EVT-0001</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">fecha_completa</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Timestamp (ISO 8601)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2026-09-09 10:51:47.656000</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">anio</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2026</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">mes</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">9</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">dia</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">9</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">hora</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">10</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">dia_semana</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">4</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">usuario.id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac2d59c70dc61ee2cba</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">usuario.codigo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">USR-00001</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">usuario.nombre</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Carlos Mendoza</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">usuario.pais</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Colombia</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">usuario.ciudad</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Bogotá</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">usuario.segmento</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Cinéfilo Premium</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">usuario.plan</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Premium 4K</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">contenido.id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac2d59c70dc61ee2caf</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">contenido.tipo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Pelicula</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">contenido.titulo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Inception</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">contenido.genero_o_categoria</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Ciencia Ficción</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">contenido.anio</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2010</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">duracion_vista_segundos</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">0</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">duracion_vista_minutos</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Double / Float</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">0.0</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">porcentaje_visto</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Double / Float</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">0.0</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">tipo_evento</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">PLAY</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">bitrate_kbps</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">15000</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">latencia_ms</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">42</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">contenido.duracion_total_seg</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">4171</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">completado</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Boolean</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">True</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">abandono</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Boolean</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">False</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">eventos_buffering</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad reproducciones_analiticas.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">0</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl">
+        <div class="p-6 bg-slate-850 border-b border-slate-800 flex flex-col md:flex-row justify-between md:items-center gap-2">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg">📦</span>
+              <h2 class="text-xl font-bold text-white tracking-wide">coleccion: <span class="text-rose-400">suscripciones</span></h2>
+              <span class="px-2.5 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300 border border-slate-700">Transaccional / Ingesta (OLTP)</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Registros: <strong class="text-white">1,506</strong> | Total atributos: <strong class="text-white">10</strong></p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-950/60 text-xs uppercase text-slate-400 border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Campo</th>
+                <th class="py-3 px-4">Tipo de Dato</th>
+                <th class="py-3 px-4">Restricción</th>
+                <th class="py-3 px-4">Sensibilidad</th>
+                <th class="py-3 px-4">Descripción de Negocio</th>
+                <th class="py-3 px-4">Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60">
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Primaria</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único autogenerado del documento BSON.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac3d59c70dc61ee2cbd</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">codigo_suscripcion</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Único</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único del contrato de suscripción (SUB-XXXXX).</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">SUB-00001</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">usuario_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Foránea</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Referencia al suscriptor titular de la cuenta.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac2d59c70dc61ee2cba</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">plan</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Pública</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Modalidad de suscripción contratada: BASICO (720p), ESTANDAR (1080p), PREMIUM (4K UHD).</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Premium 4K</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">estado</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Estado de la membresía: ACTIVA, CANCELADA, EN_MORA, PAUSADA.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Activa</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">precio_mensual</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Integer (Int32 / Int64)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad suscripciones.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">45000</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">moneda</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad suscripciones.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">COP</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">fecha_inicio</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Timestamp (ISO 8601)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Requerido</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Fecha de activación del ciclo de facturación.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2026-08-10 13:51:47.050000</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">fecha_fin</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Timestamp (ISO 8601)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad suscripciones.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2027-08-10 13:51:47.050000</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">renovacion_automatica</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Boolean</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad suscripciones.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">True</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl">
+        <div class="p-6 bg-slate-850 border-b border-slate-800 flex flex-col md:flex-row justify-between md:items-center gap-2">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="text-lg">📦</span>
+              <h2 class="text-xl font-bold text-white tracking-wide">coleccion: <span class="text-rose-400">usuarios</span></h2>
+              <span class="px-2.5 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300 border border-slate-700">Transaccional / Ingesta (OLTP)</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Registros: <strong class="text-white">1,503</strong> | Total atributos: <strong class="text-white">11</strong></p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-950/60 text-xs uppercase text-slate-400 border-b border-slate-800">
+              <tr>
+                <th class="py-3 px-4">Campo</th>
+                <th class="py-3 px-4">Tipo de Dato</th>
+                <th class="py-3 px-4">Restricción</th>
+                <th class="py-3 px-4">Sensibilidad</th>
+                <th class="py-3 px-4">Descripción de Negocio</th>
+                <th class="py-3 px-4">Ejemplo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60">
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">_id</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">ObjectId (BSON Key)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Clave Primaria</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Identificador único autogenerado del documento BSON.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">6aa1aac2d59c70dc61ee2cba</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">codigo_usuario</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Único / Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Código único de negocio asignado al suscriptor (USR-XXXXX).</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">USR-00001</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">nombre</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Requerido</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-rose-500/10 text-rose-400 border-rose-500/30">Confidencial (PII)</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Nombre completo o alias del suscriptor de la plataforma.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Carlos Mendoza</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">correo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Único / Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-rose-500/10 text-rose-400 border-rose-500/30">Confidencial (PII)</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Dirección de correo electrónico principal para inicio de sesión y facturación.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">carlos.mendoza@hyperflix.io</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">contraseña_hash</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad usuarios.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">sha256$e3b0c44298fc1c149afbf4c8996fb92427ae41e4...</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">pais</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">País de residencia del usuario para segmentación geográfica de catálogo.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Colombia</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">ciudad</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Opcional</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Ciudad o municipio de residencia del suscriptor.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Bogotá</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">segmento</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Indexado</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Segmentación comercial del usuario: VIP, ESTUDIANTE, FREEMIUM, REGULAR.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Cinéfilo Premium</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">dispositivo_frecuente</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">String (Varchar)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">General</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Campo operacional de la entidad usuarios.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">Smart TV Samsung</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">fecha_registro</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Timestamp (ISO 8601)</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Requerido</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Fecha y hora exacta en la que el usuario creó su cuenta.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">2026-05-12 13:51:46.858000</td>
+              </tr>
+
+              <tr class="hover:bg-slate-800/40 transition">
+                <td class="py-2.5 px-4 font-mono text-xs text-sky-300 font-semibold">activo</td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Boolean</td>
+                <td class="py-2.5 px-4 text-xs text-amber-300 font-medium">Booleano</td>
+                <td class="py-2.5 px-4"><span class="px-2 py-0.5 text-[11px] rounded border bg-slate-800 text-slate-300 border-slate-700">Interna</span></td>
+                <td class="py-2.5 px-4 text-xs text-slate-300">Flag booleano que indica si la señal se encuentra al aire.</td>
+                <td class="py-2.5 px-4 font-mono text-xs text-slate-400">True</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>

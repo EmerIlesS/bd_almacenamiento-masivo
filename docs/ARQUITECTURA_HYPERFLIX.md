@@ -427,6 +427,7 @@ El repositorio cuenta con la implementación ejecutable completa que valida esta
 | **Consumidor CDC (Spark Streaming)** | `scripts/consumidor_streaming_cdc.py` | Consumidor reactivo con Change Streams que procesa, enriquece y detecta anomalías QoS en tiempo real. |
 | **Productor Streaming (Kafka)** | `scripts/productor_streaming.py` | Emisor continuo de telemetría de streaming y eventos de usuario hacia MongoDB Atlas. |
 | **Infraestructura como Código (IaC)** | `terraform/` + `infraestructura.py` | Definición declarativa de clúster Atlas Multi-Región y S3 Data Lake CRR con script de automatización. |
+| **Catálogo y Diccionario de Datos** | `scripts/generar_diccionario_datos.py` + `catalogo_datos.py` | Introspección dinámica de 12 colecciones Atlas y 9 particiones Parquet con exportación en MD, JSON y HTML. |
 | **Plataforma Web & IPTV** | `web/index.html` + `web/app.js` | Landing page, catálogo interactivo, reproductor IPTV en vivo vía HLS y monitor de telemetría. |
 
 ---
