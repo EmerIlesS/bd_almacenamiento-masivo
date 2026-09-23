@@ -105,11 +105,12 @@ Ejecuta el pipeline de desnormalización que construye la tabla de hechos `FACT_
 python scripts/transformar_oltp_a_olap.py
 ```
 
-### 7. Benchmarking de Consultas Analíticas
-Evalúa el rendimiento de las 6 consultas analíticas con índices compuestos verificando que las latencias sean $< 500$ ms (promedio real: ~222 ms):
+### 7. Benchmarking de 10 Consultas Analíticas Optimizadas (OLAP) ⭐
+Evalúa el rendimiento de 10 consultas analíticas complejas sobre el modelo dimensional desnormalizado (`reproducciones_analiticas`) con índices compuestos selectivos y `allowDiskUse: true`, garantizando latencias bajo el SLA (< 500 ms):
 ```powershell
 python scripts/benchmarking_consultas.py
 ```
+*(Promedio real obtenido: ~243 ms sobre más de 20.000 eventos analíticos).*
 
 ### 8. Ejecutar el Pipeline del Data Lake (Parquet + Snappy) ⭐
 Ejecuta el pipeline oficial que extrae de Atlas, transforma con Pandas y genera los archivos en las 3 zonas (`raw`, `processed`, `curated`):
@@ -167,7 +168,21 @@ python data_warehouse.py
 
 *(Opcional: Si deseas ejecutar el caso de estudio de clase sobre e-commerce/ventas: `python data_warehouse.py ventas`).*
 
-### 12. Lanzar la Plataforma Web & Reproductor IPTV en Vivo
+### 12. Generar el Dashboard de Monitoreo Integral (Métricas, Latencias y Costos) ⭐
+Genera un panel visual de 6 gráficos de alta resolución (`dashboard_monitoreo_latest.png`) y un reporte ejecutivo en consola que audita en tiempo real:
+1. **Volumen de Documentos por Colección** (OLTP, OLAP, Star Schema).
+2. **Cumplimiento de SLA de Latencia** (< 500 ms) en las 10 consultas analíticas.
+3. **Estimación de Costos Mensuales de Infraestructura Cloud** (MongoDB Atlas M10 + Almacenamiento).
+4. **Tendencia de Streaming Mensual** (Evolución de horas vistas y sesiones).
+5. **Métricas de Capacidad y Almacenamiento** (Normalizadas en GB y proyección temporal).
+6. **Resumen Ejecutivo de Disponibilidad del Sistema** (KPIs de retención, latencia media y estado operativo).
+
+```powershell
+python dashboard.py
+```
+*(O directamente: `python scripts/dashboard_monitoreo.py`).*
+
+### 13. Lanzar la Plataforma Web & Reproductor IPTV en Vivo
 Abre directamente `web/index.html` en tu navegador, o inicia un servidor local:
 ```powershell
 python -m http.server 8000 --directory web
@@ -176,13 +191,18 @@ Luego ingresa en tu navegador a: `http://localhost:8000`.
 
 ---
 
-## 📊 Consultas Analíticas Evaluadas en Benchmarking
-1. **Top 10 Películas más reproducidas y tiempo total consumido** (Latencia: ~500 ms).
-2. **Tasa de Abandono (Drop-off Rate) por Género de Película** (Latencia: ~208 ms).
-3. **Calidad de Servicio (QoS): Buffering, Bitrate y Latencia por Dispositivo y SO** (Latencia: ~150 ms).
-4. **Distribución de Audiencia y Horas Vistas por País y Plan de Suscripción** (Latencia: ~163 ms).
-5. **Análisis de Horas Pico y Picos de Carga (Stress Analysis)** (Latencia: ~162 ms).
-6. **Comparativa de Consumo: Películas VOD vs Canales de TV en Vivo IPTV** (Latencia: ~145 ms).
+## 📊 Las 10 Consultas Analíticas Evaluadas en Benchmarking
+Todas las consultas se ejecutan con `allowDiskUse: true` e índices compuestos dedicados:
+1. **Series Temporales de Streaming Mensual:** Evolución histórica de horas vistas y reproducciones por mes.
+2. **Top 5 Contenidos con Mayor Engagement por Género:** Ranking de películas/series líderes en horas vistas y completitud.
+3. **Rendimiento de Audiencia por Segmento de Usuario y Ciudad:** Análisis geográfico de retención.
+4. **Consumo Promedio y Volumen por Plan de Suscripción:** Comparativa Premium vs Estándar vs Básico.
+5. **Tendencia de Streaming según Día de la Semana:** Análisis de picos de fin de semana vs días laborales.
+6. **Tasa de Abandono (Drop-off Rate) por Tipo de Dispositivo:** Diagnóstico de fallos en Smart TVs, Web y Móviles.
+7. **Top 10 Usuarios VIP / Super-Streamers:** Clientes de mayor fidelidad y horas reproducidas acumuladas.
+8. **Reproducciones Trimestrales (Estacionalidad Q1-Q4):** Comportamiento estacional por trimestres con `$ceil` y `$divide`.
+9. **Tiempo Medio de Sesión por Ciudad y Segmento:** Análisis de duración de sesión en las 15 principales ciudades.
+10. **Top 10 Contenidos con Mayor Retención / Completitud (%):** Eficacia del contenido midiendo el porcentaje visto.
 
 ---
 

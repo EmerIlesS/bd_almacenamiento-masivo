@@ -28,3 +28,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Capturas temporales del dashboard (conservar solo dashboard_monitoreo_latest.png)
+dashboard_monitoreo_20*.png
+
