@@ -1,6 +1,6 @@
 # 🏗️ HYPERFLIX — Infraestructura como Código (IaC) con Terraform y Automatización
 **Materia:** Bases de Datos y Almacenamiento Masivo (Octavo Semestre)  
-**Programa:** Ingeniería de Sistemas — Instituto Tecnológico del Putumayo (ITP)  
+**Programa:** Ingeniería de Sistemas — Institucion Universitaria del Putumayo 
 **Proyecto:** HYPERFLIX — Plataforma de Streaming, VOD, Canales IPTV y Telemetría Masiva  
 
 ---

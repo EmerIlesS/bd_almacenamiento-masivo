@@ -5,7 +5,7 @@
 ---
 
 ### DATOS GENERALES
-- **Institución:** Instituto Tecnológico del Putumayo (ITP)
+- **Institución:** Institutcion Universitaria del Putumayo
 - **Programa:** Ingeniería de Sistemas
 - **Asignatura:** Bases de Datos y Almacenamiento Masivo
 - **Semestre:** 2026-1 (Octavo Semestre)

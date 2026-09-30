@@ -66,14 +66,15 @@ bd_almacenamiento-masivo/
 
 ## 🚀 Guía Paso a Paso de Ejecución
 
-### 1. Clonar el Repositorio e Instalar Dependencias
+### 1. Clonar el Repositorio y Aprovisionar el Entorno con IaC (`iac_setup.py`) ⭐
+El proyecto incluye un orquestador automático de **Infraestructura como Código (Configuration as Code)** que en un solo comando valida tu versión de Python, crea el entorno virtual `.venv`, instala todas las dependencias (`requirements.txt`), provisiona las carpetas del Data Lake (`data_lake/raw`, `processed`, `curated`) y ejecuta un Health Check a MongoDB Atlas:
+
 ```powershell
 git clone git@github.com:EmerIlesS/bd_almacenamiento-masivo.git
 cd bd_almacenamiento-masivo
-python -m venv .venv
-.\.venv\Scripts\activate
-pip install -r requirements.txt
+python iac_setup.py
 ```
+*(Luego activa tu entorno con: `.\.venv\Scripts\activate`).*
 
 ### 2. Configurar Variables de Entorno
 Crea un archivo `.env` en la raíz (usando de base `.env.example`):

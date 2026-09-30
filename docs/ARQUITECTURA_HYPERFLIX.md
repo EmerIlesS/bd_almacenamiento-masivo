@@ -1,6 +1,6 @@
 # HYPERFLIX — Documento Maestro de Arquitectura de Datos
 **Materia:** Bases de Datos y Almacenamiento Masivo  
-**Semestre:** 2026-1 (Octavo Semestre) — ITP  
+**Semestre:** 2026-1 (Octavo Semestre)
 **Fase 1:** Semanas 1 y 2 — Análisis de Requisitos y Diseño de Arquitectura  
 
 ---

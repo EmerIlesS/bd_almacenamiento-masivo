@@ -3,7 +3,7 @@
   "terraform_version": "1.8.5",
   "serial": 1,
   "lineage": "hyperflix-iac-prod-state-2026",
-  "timestamp_utc": "2026-09-23T00:42:01.164233Z",
+  "timestamp_utc": "2026-09-24T02:20:38.967811Z",
   "proyecto": "HYPERFLIX - Streaming Masivo",
   "proveedores": {
     "mongodbatlas": "mongodb/mongodbatlas v1.15.0",
@@ -15,7 +15,7 @@
       "tier": "M10 (Replica Set Multi-Región)",
       "info_en_vivo": {
         "status": "OPERATIONAL",
-        "latencia_ms": 2331.94,
+        "latencia_ms": 3043.04,
         "replica_set": "atlas-ryejvp-shard-0",
         "primary": "ac-fryycan-shard-00-02.2jojlgy.mongodb.net:27017",
         "nodos_totales": 3,
@@ -85,7 +85,7 @@
   },
   "sla_cumplimiento": {
     "latencia_bd_objetivo": "< 500 ms",
-    "latencia_bd_actual": "2331.94 ms",
+    "latencia_bd_actual": "3043.04 ms",
     "estado_general": "OPERACIONAL - 100% LISTO PARA PRODUCCIÓN"
   }
 }

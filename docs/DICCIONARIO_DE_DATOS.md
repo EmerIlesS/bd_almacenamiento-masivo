@@ -1,6 +1,6 @@
 # 📖 HYPERFLIX — Catálogo y Diccionario Oficial de Datos
 **Materia:** Bases de Datos y Almacenamiento Masivo (Octavo Semestre)  
-**Programa:** Ingeniería de Sistemas — Instituto Tecnológico del Putumayo (ITP)  
+**Programa:** Ingeniería de Sistemas — Institucion Universitaria del Putumayo 
 **Generación Automática:** 2026-09-22 20:00:45  
 **Dominio:** Plataforma de Streaming de Video, VOD, Canales IPTV y Telemetría QoS  
 
