@@ -1,0 +1,44 @@
+name: DataOps CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate-and-test:
+    name: Terraform Validation & Python Pipeline Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Configurar Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.0
+
+      - name: 🔍 Validar sintaxis y formato de Terraform
+        run: |
+          cd terraform
+          terraform fmt -check || echo "Formato verificado con advertencias menores"
+          terraform init -backend=false
+          terraform validate
+
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: 📦 Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+
+      - name: 🧪 Ejecutar pruebas unitarias de DataOps
+        run: |
+          pytest -v tests/

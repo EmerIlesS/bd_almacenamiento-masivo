@@ -5,14 +5,14 @@
 variable "atlas_public_key" {
   type        = string
   description = "Clave pública de la API de MongoDB Atlas"
-  default     = ""
+  default     = "mock_atlas_public_key"
 }
 
 variable "atlas_private_key" {
   type        = string
   description = "Clave privada de la API de MongoDB Atlas"
   sensitive   = true
-  default     = ""
+  default     = "mock_atlas_private_key"
 }
 
 variable "atlas_org_id" {

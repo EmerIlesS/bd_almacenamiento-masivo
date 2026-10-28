@@ -32,3 +32,11 @@ desktop.ini
 # Capturas temporales del dashboard (conservar solo dashboard_monitoreo_latest.png)
 dashboard_monitoreo_20*.png
 
+# Terraform local cache, secretos y estados
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+crash.log

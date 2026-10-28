@@ -1,48 +1,44 @@
 # =============================================================================
-# HYPERFLIX - OUTPUTS DE INFRAESTRUCTURA (IaC)
+# HYPERFLIX - OUTPUTS DE INFRAESTRUCTURA COMO CÓDIGO (IaC)
+# =============================================================================
+# Refleja el clúster real gratuito M0 en MongoDB Atlas del estudiante
 # =============================================================================
 
-output "project_id" {
-  description = "ID del proyecto aprovisionado en MongoDB Atlas"
-  value       = mongodbatlas_project.hyperflix_project.id
-}
-
-output "cluster_name" {
-  description = "Nombre del clúster de base de datos"
-  value       = mongodbatlas_advanced_cluster.hyperflix_cluster.name
-}
-
-output "connection_string_standard" {
+output "cluster_connection_string" {
   description = "Cadena de conexión estándar (SRV) a MongoDB Atlas"
   value       = mongodbatlas_advanced_cluster.hyperflix_cluster.connection_strings[0].standard_srv
+  sensitive   = true
 }
 
-output "database_user" {
-  description = "Usuario de base de datos configurado"
+output "cluster_id" {
+  description = "Identificador único del clúster en MongoDB Atlas"
+  value       = mongodbatlas_advanced_cluster.hyperflix_cluster.cluster_id
+}
+
+output "cluster_info" {
+  description = "Ficha técnica y especificaciones del clúster de base de datos"
+  value = {
+    backup      = false
+    disk_gb     = 0.5
+    instance    = var.cluster_tier
+    name        = var.cluster_name
+    provider    = var.cloud_provider
+    region      = var.primary_region
+    replication = "3 nodos (REPLICASET)"
+  }
+}
+
+output "cluster_state" {
+  description = "Estado de aprovisionamiento del clúster en la nube"
+  value       = mongodbatlas_advanced_cluster.hyperflix_cluster.state_name
+}
+
+output "database_username" {
+  description = "Usuario administrador de base de datos aprovisionado"
   value       = mongodbatlas_database_user.db_user.username
 }
 
-output "s3_primary_bucket_name" {
-  description = "Nombre del bucket S3 primario del Data Lake (us-east-1)"
-  value       = aws_s3_bucket.datalake_primary.id
-}
-
-output "s3_primary_bucket_arn" {
-  description = "ARN del bucket primario"
-  value       = aws_s3_bucket.datalake_primary.arn
-}
-
-output "s3_dr_bucket_name" {
-  description = "Nombre del bucket S3 secundario de Disaster Recovery (us-west-2)"
-  value       = aws_s3_bucket.datalake_dr.id
-}
-
-output "s3_dr_bucket_arn" {
-  description = "ARN del bucket de Disaster Recovery"
-  value       = aws_s3_bucket.datalake_dr.arn
-}
-
-output "replication_status" {
-  description = "Estado de la configuración de Cross-Region Replication (CRR)"
-  value       = "ACTIVADA - Replicación continua hacia AWS us-west-2"
+output "project_id" {
+  description = "ID del proyecto en MongoDB Atlas"
+  value       = mongodbatlas_project.hyperflix_project.id
 }
