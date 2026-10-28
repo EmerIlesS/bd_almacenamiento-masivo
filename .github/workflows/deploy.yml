@@ -18,12 +18,11 @@ jobs:
       - name: ⚙️ Configurar Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.6.0
+          terraform_version: 1.10.5
 
-      - name: 🔍 Validar sintaxis y formato de Terraform
+      - name: 🔍 Validar Terraform
         run: |
           cd terraform
-          terraform fmt -check || echo "Formato verificado con advertencias menores"
           terraform init -backend=false
           terraform validate
 
@@ -31,13 +30,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: 'pip'
 
-      - name: 📦 Instalar dependencias
+      - name: 📦 Instalar dependencias para pruebas
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest
+          pip install pandas pyarrow pytest
 
       - name: 🧪 Ejecutar pruebas unitarias de DataOps
         run: |
