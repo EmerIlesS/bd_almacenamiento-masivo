@@ -1,0 +1,7 @@
+dispositivo_id,tipo_dispositivo,categoria
+SMART_TV,Smart TV,TV
+MOVIL,Móvil,Mobile
+TABLET,Tablet,Mobile
+PC,PC,Desktop
+CONSOLA,Consola,Gaming
+DESCONOCIDO,Desconocido,Otro
