@@ -1,0 +1,63 @@
+contenido_id,titulo,genero_primario,generos,anio_estreno,duracion_min,rating_promedio,idioma
+CNT_0001,Inception,Ciencia Ficción,Ciencia Ficción,2020,90.0,8.8,Español
+CNT_0002,Interstellar,Ciencia Ficción,Ciencia Ficción,2020,90.0,8.7,Español
+CNT_0003,The Dark Knight,Acción,Acción,2020,90.0,9.0,Español
+CNT_0004,Pulp Fiction,Crimen,Crimen,2020,90.0,8.9,Español
+CNT_0005,Parasite,Drama,Drama,2020,90.0,8.5,Español
+CNT_0006,Cyberpunk 2099: Rebirth,Animación,Animación,2020,90.0,8.3,Español
+CNT_0007,El Viajero Oscuro,Documental,Documental,2020,90.0,8.6,Español
+CNT_0008,El Enigma Eterno,Ciencia Ficción,Ciencia Ficción,2020,90.0,6.9,Español
+CNT_0009,El Laberinto Oculto,Aventura,Aventura,2020,90.0,7.5,Español
+CNT_0010,El Reflejo Cibernético,Animación,Animación,2020,90.0,6.2,Español
+CNT_0011,Veloz Destino: Parte 4,Documental,Documental,2020,90.0,8.4,Español
+CNT_0012,El Reflejo Último,Aventura,Aventura,2020,90.0,6.4,Español
+CNT_0013,Oculto Enigma: Parte 4,Crimen,Crimen,2020,90.0,7.6,Español
+CNT_0014,Oscuro Destino: Parte 4,Comedia,Comedia,2020,90.0,7.7,Español
+CNT_0015,Oculto Eclipse: Parte 2,Documental,Documental,2020,90.0,7.6,Español
+CNT_0016,El Horizonte Infinito,Drama,Drama,2020,90.0,7.4,Español
+CNT_0017,El Imperio Veloz,Comedia,Comedia,2020,90.0,7.2,Español
+CNT_0018,Cibernético Viajero: Parte 4,Drama,Drama,2020,90.0,6.8,Español
+CNT_0019,El Espacio Veloz,Documental,Documental,2020,90.0,7.8,Español
+CNT_0020,El Espacio Silencioso,Drama,Drama,2020,90.0,7.6,Español
+CNT_0021,El Laberinto Eterno,Ciencia Ficción,Ciencia Ficción,2020,90.0,6.9,Español
+CNT_0022,Oscuro Laberinto: Parte 4,Drama,Drama,2020,90.0,8.1,Español
+CNT_0023,Veloz Viajero: Parte 3,Comedia,Comedia,2020,90.0,8.4,Español
+CNT_0024,El Imperio Perdido,Aventura,Aventura,2020,90.0,6.0,Español
+CNT_0025,Perdido Protocolo: Parte 1,Suspenso,Suspenso,2020,90.0,8.2,Español
+CNT_0026,Eterno Destino: Parte 3,Aventura,Aventura,2020,90.0,8.0,Español
+CNT_0027,El Eclipse Veloz,Suspenso,Suspenso,2020,90.0,9.3,Español
+CNT_0028,Último Espacio: Parte 2,Suspenso,Suspenso,2020,90.0,6.9,Español
+CNT_0029,El Reflejo Oculto,Comedia,Comedia,2020,90.0,9.0,Español
+CNT_0030,Infinito Laberinto: Parte 1,Terror,Terror,2020,90.0,7.1,Español
+CNT_0031,Silencioso Destino: Parte 3,Drama,Drama,2020,90.0,6.6,Español
+CNT_0032,El Imperio Oscuro,Acción,Acción,2020,90.0,7.6,Español
+CNT_0033,Infinito Horizonte: Parte 1,Drama,Drama,2020,90.0,7.7,Español
+CNT_0034,El Protocolo Último,Acción,Acción,2020,90.0,7.8,Español
+CNT_0035,El Reflejo Silencioso,Aventura,Aventura,2020,90.0,7.4,Español
+CNT_0036,Oculto Destino: Parte 2,Drama,Drama,2020,90.0,5.9,Español
+CNT_0037,El Laberinto Cibernético,Aventura,Aventura,2020,90.0,7.5,Español
+CNT_0038,Eterno Imperio: Parte 4,Acción,Acción,2020,90.0,9.1,Español
+CNT_0039,El Destino Veloz,Crimen,Crimen,2020,90.0,5.8,Español
+CNT_0040,Infinito Viajero: Parte 2,Terror,Terror,2020,90.0,6.1,Español
+CNT_0041,El Protocolo Perdido,Suspenso,Suspenso,2020,90.0,8.8,Español
+CNT_0042,El Protocolo Silencioso,Aventura,Aventura,2020,90.0,8.3,Español
+CNT_0043,El Reflejo Oscuro,Ciencia Ficción,Ciencia Ficción,2020,90.0,9.0,Español
+CNT_0044,Silencioso Enigma: Parte 3,Drama,Drama,2020,90.0,7.1,Español
+CNT_0045,Veloz Laberinto: Parte 3,Ciencia Ficción,Ciencia Ficción,2020,90.0,7.8,Español
+CNT_0046,Perdido Imperio: Parte 5,Acción,Acción,2020,90.0,8.1,Español
+CNT_0047,El Horizonte Oculto,Acción,Acción,2020,90.0,6.7,Español
+CNT_0048,Cibernético Imperio: Parte 4,Suspenso,Suspenso,2020,90.0,7.6,Español
+CNT_0049,El Laberinto Secreto,Documental,Documental,2020,90.0,8.3,Español
+CNT_0050,Infinito Espacio: Parte 4,Suspenso,Suspenso,2020,90.0,8.1,Español
+CNT_0051,El Espacio Secreto,Drama,Drama,2020,90.0,8.9,Español
+CNT_0052,El Enigma Cibernético,Animación,Animación,2020,90.0,7.8,Español
+CNT_0053,El Enigma Secreto,Documental,Documental,2020,90.0,8.8,Español
+CNT_0054,Silencioso Reflejo: Parte 2,Suspenso,Suspenso,2020,90.0,7.9,Español
+CNT_0055,Infinito Imperio: Parte 3,Documental,Documental,2020,90.0,7.9,Español
+CNT_0056,Eterno Reflejo: Parte 1,Drama,Drama,2020,90.0,7.4,Español
+CNT_0057,El Protocolo Secreto,Ciencia Ficción,Ciencia Ficción,2020,90.0,6.2,Español
+CNT_0058,El Reflejo Veloz,Acción,Acción,2020,90.0,8.8,Español
+CNT_0059,Cibernético Reflejo: Parte 1,Terror,Terror,2020,90.0,7.6,Español
+CNT_0060,Oscuro Laberinto: Parte 5,Drama,Drama,2020,90.0,8.8,Español
+CNT_0061,El Destino Perdido,Terror,Terror,2020,90.0,7.9,Español
+CNT_0062,Veloz Espacio: Parte 4,Comedia,Comedia,2020,90.0,6.6,Español
